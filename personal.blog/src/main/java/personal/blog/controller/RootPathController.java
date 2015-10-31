@@ -22,6 +22,8 @@ public class RootPathController {
         mav.addObject("sessionId", request.getSession().getId());
 
         LOGGER.debug(request.getSession().getId());
+
+        LOGGER.debug("测试source tree");
         return mav;
     }
 }
