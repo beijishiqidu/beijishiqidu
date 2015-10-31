@@ -7,6 +7,6 @@ public class BeiJiShiQiDu {
     private static final Logger LOGGER = Logger.getLogger(BeiJiShiQiDu.class);
 
     public static void main(String[] args) {
-        LOGGER.debug("开始执行main方法....");
+        LOGGER.debug("鎵цmain鏂规硶....");
     }
 }
