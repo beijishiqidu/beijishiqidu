@@ -8,5 +8,7 @@ public class BeiJiShiQiDu {
 
     public static void main(String[] args) {
         LOGGER.debug("执行main方法....");
+
+        LOGGER.debug("修改了main里面的一些实现...");
     }
 }
