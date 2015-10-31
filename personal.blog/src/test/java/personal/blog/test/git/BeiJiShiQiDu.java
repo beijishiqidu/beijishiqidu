@@ -7,7 +7,7 @@ public class BeiJiShiQiDu {
 	private static final Logger LOGGER = Logger.getLogger(BeiJiShiQiDu.class);
 
 	public static void addAiqingmugua() {
-		LOGGER.debug("删除了main方法，增加了爱情木瓜的方法...");
+		LOGGER.debug("删除了main方法，增加了爱情木瓜的方法...");//我就是测试立即提交合并的改动的
 	}
 
 	public static void main(String[] args) {
