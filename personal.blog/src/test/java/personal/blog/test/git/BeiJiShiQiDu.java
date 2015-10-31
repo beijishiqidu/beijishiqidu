@@ -16,12 +16,7 @@ public class BeiJiShiQiDu {
         LOGGER.debug("修改了main里面的一些实现...");// TODO删除此方法....
     }
 
-
     // 测试push的功能的。
 
     // 还是测试push多个的功能。
-
-    public static void testRollback() {
-        LOGGER.debug("测试回滚");
-    }
 }
