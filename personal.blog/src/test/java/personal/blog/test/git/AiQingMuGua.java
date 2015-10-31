@@ -7,6 +7,6 @@ public class AiQingMuGua {
 	private static final Logger LOGGER = Logger.getLogger(AiQingMuGua.class);
 	
 	public static void main(String[] args) {
-		LOGGER.debug("开始执行main方法....");
+		LOGGER.debug("鎵цmain鏂规硶....");
 	}
 }
