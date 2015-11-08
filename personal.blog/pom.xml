@@ -10,6 +10,7 @@
     <properties>
         <org.springframework-version>4.1.6.RELEASE</org.springframework-version>
         <org.springframework-security-version>4.0.2.RELEASE</org.springframework-security-version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>

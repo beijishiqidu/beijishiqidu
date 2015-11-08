@@ -5,7 +5,8 @@
 <mapper namespace="personal.blog.dao.business.IUserDao">
     <resultMap type="personal.blog.vo.User" id="userResultMap">
         <id property="id" column="id"/>
-        <result property="name" column="name"/>
+        <result property="userName" column="user_name"/>
+        <result property="password" column="password"/>
     </resultMap>
 
     <select id="getUser" parameterType="String" resultType="personal.blog.vo.User" resultMap="userResultMap">
@@ -16,10 +17,11 @@
     </select>
 
     <insert id="insertUser" parameterType="personal.blog.vo.User">
-        INSERT INTO tbl_user(ID,NAME)
+        INSERT INTO tbl_user(ID,user_name,password)
         VALUES(
         #{id},
-        #{name}
+        #{username},
+        #{password}
         )
     </insert>
 </mapper>

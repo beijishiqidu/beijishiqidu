@@ -20,11 +20,9 @@
     <mvc:annotation-driven />
 
     <!-- 静态资源访问 -->
-    <mvc:resources location="/upload/images/" mapping="/upload/images/**" /> 
-    <mvc:resources location="/images/" mapping="/images/**" /> 
+    <mvc:resources location="/images/" mapping="/images/**" />
     <mvc:resources location="/javascript/" mapping="/javascript/**" />
     <mvc:resources location="/style/" mapping="/style/**" />
-    <mvc:resources location="/compressed/" mapping="/compressed/**" />
 
 <!--     <mvc:view-controller path="/404" view-name="404" />
     <mvc:view-controller path="/500" view-name="500" /> -->

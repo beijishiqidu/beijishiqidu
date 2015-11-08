@@ -21,7 +21,7 @@ public class RootPathController {
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public ModelAndView forwardHomePage(HttpServletRequest request) {
-        ModelAndView mav = null;
+        ModelAndView mav;
         LOGGER.debug("PC端访问了主页");
         mav = new ModelAndView("index");
         mav.addObject("sessionId", request.getSession().getId());

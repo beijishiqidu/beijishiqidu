@@ -9,7 +9,6 @@ import personal.blog.vo.User;
 public interface UserService {
     User getUser(String userID);
 
-    //表明该方法需要事务
     @Transactional
     int insertUser(User user);
 
