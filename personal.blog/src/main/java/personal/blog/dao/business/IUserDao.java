@@ -8,6 +8,8 @@ import personal.blog.vo.User;
 public interface IUserDao {
 
     public User getUser(String userID);
+    
+    
 
     public int insertUser(User user);
 }
