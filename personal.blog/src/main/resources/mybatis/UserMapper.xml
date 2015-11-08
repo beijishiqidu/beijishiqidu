@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 这里的namespace名字必须为执行该sql的dao地址&nbsp; -->
+<mapper namespace="personal.blog.dao.business.IUserDao">
+    <resultMap type="personal.blog.vo.User" id="userResultMap">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <select id="getUser" parameterType="String" resultType="personal.blog.vo.User" resultMap="userResultMap">
+        <![CDATA[
+            SELECT * FROM tbl_user
+            WHERE ID =  #{id}
+        ]]>
+    </select>
+
+    <insert id="insertUser" parameterType="personal.blog.vo.User">
+        INSERT INTO tbl_user(ID,NAME)
+        VALUES(
+        #{id},
+        #{name}
+        )
+    </insert>
+</mapper>
