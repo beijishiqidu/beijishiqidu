@@ -9,5 +9,9 @@
 <body>
 <h2>北极十七度的个人网站正在建设中......</h2>
 tomcat1当前的session的ID为${sessionId}
+当前时间毫秒数：${currentTime}
+<hr/>
+===${aa}---
+<%@include file="cnzz.jsp" %>
 </body>
 </html>

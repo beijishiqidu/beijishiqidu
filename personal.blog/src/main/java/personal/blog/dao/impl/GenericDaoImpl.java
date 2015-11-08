@@ -123,14 +123,14 @@ public class GenericDaoImpl implements GenericDao {
                 Query query = session.createQuery(hql);
                 query.setFirstResult(firstResult);
                 query.setMaxResults(maxResults);
-                List<T> list = query.list();
-                return list;
+                return query.list();
             }
         });
     }
 
     @Override
-    public <T> List<T> findObjectListByHqlWithParams(final String hql, final int firstResult, final int maxResults, final Object... params) {
+    public <T> List<T> findObjectListByHqlWithParams(final String hql, final int firstResult, final int maxResults,
+                                                     final Object... params) {
         return hibernateTemplate.execute(new HibernateCallback<List<T>>() {
             @Override
             @SuppressWarnings("unchecked")
@@ -143,8 +143,7 @@ public class GenericDaoImpl implements GenericDao {
                         query.setParameter(i, params[i]);
                     }
                 }
-                List<T> list = query.list();
-                return list;
+                return query.list();
             }
         });
     }
@@ -182,7 +181,8 @@ public class GenericDaoImpl implements GenericDao {
     }
 
     @Override
-    public <T> List<T> execSqlQuery(final Class<T> cls, final String sqlStr, final int firstResult, final int maxResults, final Object... params) {
+    public <T> List<T> execSqlQuery(final Class<T> cls, final String sqlStr, final int firstResult,
+                                    final int maxResults, final Object... params) {
         return hibernateTemplate.execute(new HibernateCallback<List<T>>() {
             @Override
             @SuppressWarnings("unchecked")
