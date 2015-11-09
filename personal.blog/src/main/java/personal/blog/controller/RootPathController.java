@@ -26,12 +26,13 @@ public class RootPathController {
         mav = new ModelAndView("index");
         mav.addObject("sessionId", request.getSession().getId());
         LOGGER.debug(request.getSession().getId());
-
         User user = userService.getUser("1");
         mav.addObject("user",user);
         LOGGER.debug("测试热部署.....");
-
         mav.addObject("aa","xxxxx");
+
+        LOGGER.debug(user.getPassword()+"======================");
+
         return mav;
     }
 }
