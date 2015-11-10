@@ -10,11 +10,14 @@ import personal.blog.service.business.UserService;
 import personal.blog.vo.User;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Random;
 
 @Controller
 public class RootPathController {
 
     private static final Logger LOGGER = Logger.getLogger(RootPathController.class);
+
+    private static final Random rand = new Random();
 
     @Autowired
     private UserService userService;
@@ -32,6 +35,8 @@ public class RootPathController {
         mav.addObject("aa","xxxxx");
 
         LOGGER.debug(user.getPassword()+"======================");
+        int imgNum =  rand.nextInt(5)+1;
+        mav.addObject("backGroundImgPath","images/"+imgNum+".jpg");
 
         return mav;
     }
