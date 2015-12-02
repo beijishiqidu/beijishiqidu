@@ -19,7 +19,9 @@
     <div class="navigate-container" style="background-image: url('${path}/${backGroundImgPath}')">
         <ul>
             <li class="first"><span>首页</span></li>
-            <li class="middle"><span>技术天地</span></li>
+            <li class="middle"><span>数据库</span></li>
+            <li class="middle"><span>服务器</span></li>
+            <li class="middle"><span>编程语言</span></li>
             <li class="middle"><span>相册</span></li>
             <li class="middle"><span>随笔杂谈</span></li>
             <li class="middle"><span>翻译</span></li>

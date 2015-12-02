@@ -35,7 +35,7 @@ public class RootPathController {
         mav.addObject("aa","xxxxx");
 
         LOGGER.debug(user.getPassword()+"======================");
-        int imgNum =  rand.nextInt(5)+1;
+        int imgNum =  rand.nextInt(2)+1;
         mav.addObject("backGroundImgPath","images/"+imgNum+".jpg");
 
         return mav;
