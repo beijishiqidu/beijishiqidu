@@ -284,12 +284,12 @@
         </dependency>
 
         <!-- 不知道谁依赖这个包了，后期要搞明白 -->
-        <dependency>
+        <!-- <dependency>
             <groupId>jgroups</groupId>
             <artifactId>jgroups</artifactId>
             <version>3.6.4.Final</version>
             <classifier>sources</classifier>
-        </dependency>
+        </dependency> -->
 
         <dependency>
             <groupId>net.sf.ehcache</groupId>

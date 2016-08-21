@@ -44,7 +44,7 @@
                 
             </props>
         </property>
-        <!--<property name="packagesToScan" value="personal.blog.vo." />-->
+        <property name="packagesToScan" value="personal.blog.vo." />
         <!-- <property name="configLocations">
             <list>
                 <value>
