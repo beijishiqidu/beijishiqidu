@@ -1,6 +1,8 @@
 @charset "utf-8";
 .header-container-wrapper{
     background-color: #9bc456;
+    height: 550px;
+    background-image: url("../images/bannert.jpg");
 }
 
 .header-container{
@@ -8,54 +10,180 @@
     color: white;
     font-size: 16px;
     padding: 0 20px;
+    background-color: black;
+    opacity: 0.7;
 }
 
-.header-container .left-area{
+.header-container .navigate-container{
+	width: 1100px;
+	margin: 0 auto;
+	height: 65px;
+}
+
+ .header-container .left-area{
     float: left;
+    height: 65px;
+    vertical-align: middle;
 }
 
 .header-container .right-area{
     float: right;
-    line-height: 86px;
+    line-height: 65px;
 }
 
-.header-container .left-area .navigate-container ul{
+.header-container .left-area  ul{
     list-style: none;
     margin: 0 auto;
 }
 
-.header-container .left-area .navigate-container li{
+.header-container .left-area li{
     float: left;
-    font-size: 20px;
     text-align: center;
     color: #ffffff;
-    font-weight: bold;
     padding: 20px 0;
 }
 
-.header-container .left-area .navigate-container li:hover{
-	background-color: #ffffff;
-	color: gray;
+.header-container .left-area li.first span{
+	padding-left: 0;
 }
 
-.header-container .left-area .navigate-container li.middle{
-    /* margin: 0 35px; */
-}
-
-.header-container .left-area .navigate-container li span{
+.header-container .left-area li span{
     cursor: pointer;
-    padding: 10px 40px;
+    padding: 0 40px;
     display: inline-block;
 }
 
 .body-container{
     min-height: 860px;
+    margin-top: 25px;
 }
 
 .body-container .content-container{
-    width: 1180px;
+    width: 1100px;
     margin: 0 auto;
-    padding: 10px;
+}
+
+.content-container .left-area{
+	width: 280px;
+	float: left;
+}
+
+.content-container .personal-info{
+	height: 350px;
+	background-color: white;
+}
+
+.content-container .personal-info .photo{
+    margin: 0 auto;
+    width: 120px;
+    padding-top: 30px;
+    text-align: center;
+}
+
+.content-container .personal-info .photo img{
+    border-radius: 50%;
+}
+
+.content-container .personal-info .name{
+	text-align: center;
+	padding-top: 10px;
+	color: #333;
+}
+
+.content-container .personal-info .address{
+	text-align: center;
+	padding: 10px 0;
+	color: #999;
+}
+
+.content-container .personal-info .mark{
+	padding: 20px;
+	color: #999;
+	line-height: 30px;
+}
+
+.content-container .article-area{
+	background-color: white;
+	margin-top: 20px;
+	color: #666;
+}
+
+.content-container .article-area .title{
+	padding: 20px 0 0 20px;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.content-container .article-area .title i{
+	font-weight: normal;
+	color: #999;
+}
+
+.content-container .article-area .content{
+	padding: 10px 0;
+}
+
+.content-container .article-area .content li{
+    height: 40px;
+    padding-left: 40px;
+    cursor: pointer;
+    line-height: 40px;
+    border-left: 2px solid white;
+}
+
+.content-container .article-area .content li:hover{
+	background-color: #f5f5f5;
+	border-left: 2px solid green;
+}
+        
+.line{
+	height: 1px;
+	background-color: rgb(231,231,231);
+	margin: 0 20px;
+	width: inherit;
+}
+
+.content-container .right-area{
+	margin-left: 20px;
+	width: 800px;
+	float: left;
+}
+
+.content-container .article-item{
+	width: 800px;
+	height: 302px;
+	background-color: white;
+	border-top: 2px solid green;
+	margin-bottom: 20px;
+	color: #999;
+}
+
+.content-container .article-item .title{
+	font-size: 18px;
+	margin: 20px 0 20px 20px;
+	color: #333;
+	cursor: pointer;
+}
+
+.content-container .article-item .line{
+	margin: 0 0 20px 0;
+	border-bottom: 1px dotted #999;
+	height: 0;
+}
+
+.content-container .article-content{
+	line-height: 35px;
+	margin: 10px 20px 10px 20px;
+}
+
+.ap-area .article-ap-la{
+	float: left;
+	margin: 0 0 20px 20px;
+}
+
+.ap-area .article-ap-ra{
+	float: right;
+	margin-right: 20px;
 }
 
 .footer-container-wrapper{
