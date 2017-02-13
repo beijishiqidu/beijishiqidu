@@ -93,3 +93,9 @@ li {
 .bold{
     font-weight: bold;
 }
+
+input{
+	height:40px;
+	line-height:30px;
+	border:1px solid #cccccc;
+}

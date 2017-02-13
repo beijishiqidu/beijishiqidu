@@ -1,4 +1,4 @@
-package personal.blog.service.business;
+package personal.blog.service;
 
 import org.springframework.transaction.annotation.Transactional;
 import personal.blog.vo.User;

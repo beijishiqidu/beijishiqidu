@@ -1,10 +1,11 @@
-package personal.blog.service.business.impl;
+package personal.blog.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import personal.blog.dao.business.IUserDao;
-import personal.blog.service.business.UserService;
+import personal.blog.service.UserService;
 import personal.blog.vo.User;
 
 /**

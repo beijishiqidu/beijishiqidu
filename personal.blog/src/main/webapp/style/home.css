@@ -44,12 +44,12 @@
 }
 
 .header-container .left-area li.first span{
-	padding-left: 0;
+	margin-left: 0;
 }
 
 .header-container .left-area li span{
     cursor: pointer;
-    padding: 0 40px;
+    margin: 0 40px;
     display: inline-block;
 }
 

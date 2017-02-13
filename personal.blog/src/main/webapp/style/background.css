@@ -1,0 +1,244 @@
+.bg-color{
+	background-color: #454545;
+}
+
+.error{
+	font-size: 12px;
+	color: red;
+	text-align: center;
+}
+
+.center.form{
+	width: 500px;
+	height:300px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #ffffff;
+	text-align: center;
+	margin-top: 200px;
+}
+
+.form .title{
+	margin-bottom: 30px;
+	padding-top: 20px;
+	color: #5a5a5a;
+	font-weight: bolder;
+	font-size: 24px;
+}
+
+.form .field{
+	margin-bottom: 20px;
+	position: relative;
+}
+
+.form .field input{
+    width: 80%;
+    padding-left: 45px;
+}
+
+.form .submit{
+	width: 447px;
+	display: inline-block;
+	background-color: #c80b0b;
+	height: 44px;
+	line-height: 44px;
+	cursor: pointer;
+	color: #ffffff;
+	font-size: 22px;
+}
+
+input[placeholder]{
+    color:#b3b2b2 !important;
+    font-size: 18px;
+    padding-left: 2px;
+    font-family: "Microsoft YaHei", "SimSun";
+}
+
+.admin-home-body{
+	background-color: gray;
+}
+.home{
+}
+
+.home .home-wrapper{
+	width: 1280px;
+	margin: 0 auto;
+	background-color: white;
+}
+
+.main-menu{
+	background-color: #f5f5f5;
+}
+
+.main-content{
+	width: 1200px;
+	margin: auto;
+}
+
+.customer-info-list{
+	padding: 0px 0px 20px 0px;
+	margin: 20px auto;
+}
+.customer-info-list h3{
+	text-align: center;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.customer-info-list table{
+    border-collapse: collapse;
+	border-spacing: 0;
+	margin:  auto;
+	table-layout: fixed;
+}
+
+.customer-info-list table td,
+.customer-info-list table th{
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+    height: 50px;
+}
+
+.customer-info-list table thead th{
+	width: 108px;
+}
+
+.customer-info-list table tbody td{
+    width: 108px;
+    text-align: center;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.customer-info-list table tbody td div{
+    width:108px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.customer-info-list table tfoot td{
+    width: 100%;
+    text-align: right;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+}
+
+/*鏂伴椈鏂板椤甸潰鏍峰紡*/
+.main-content h3{
+	text-align: center;
+	margin: 20px auto;
+}
+
+
+.main-content .button-area{
+	height: 100px;
+}
+.main-content button{
+	display: inline-block;
+	width:60px;
+	height: 30px;
+	margin: 20px auto;
+	float: right;
+}
+
+.main-content .error,
+.main-content .success{
+	margin-top: 0;
+	text-align: center;
+	display: block;
+	float: none;
+}
+
+.main-content .title-container{
+	padding-bottom: 27px;
+}
+
+.main-content .title-container .title{
+	width: 1118px;
+}
+
+.main-content .title-container label{
+	margin-right: 20px;
+}
+
+.main-content .title-container .title-pic{
+    height: 21px;
+    line-height: 21px;
+    width: 1118px;
+}
+
+.main-content .field-container{
+    padding-bottom: 27px;
+    text-align: left;
+}
+
+.main-content .field-container .title{
+    width: 1118px;
+    height: 32px;
+}
+
+.main-content .field-container label{
+    margin-right: 20px;
+}
+
+.main-content .field-container .content{
+    width: 1108px;
+    height: 120px;
+    padding: 5px;
+    resize: none;
+}
+
+.main-content .field-container .case-description{
+	vertical-align: top;
+}
+
+.main-content .field-container select{
+    width: 1118px;
+}
+.main-content .field-container .ui-selectmenu-text,textarea{
+    color: #666666
+}
+
+.main-content .field-container .case-image{
+	width: 818px; 
+	height: auto;
+	line-height: normal;
+	margin-bottom: 10px;
+}
+
+.main-content .field-container .add-case-image-button{
+	margin: 0;
+	height: 23px;
+}
+
+.main-content .field-container #addCaseImageArea{
+	padding-left: 78px;
+}
+
+.main-content .field-container span.error-tips{
+	padding-left: 85px;
+}
+
+.main-content .field-container input.checkbox{
+	height: 26px;
+    vertical-align: middle;
+}
+
+.login .field img{
+	width: 41px; 
+	height: 42px;
+    position: absolute;
+    left: 28px;
+    top: 1px;
+}
+
+.qtip-default{
+	border: 1px solid #f1d031!important;
+}
+
+.qtip-content{
+	padding: 0!important;
+}

@@ -12,7 +12,7 @@
     <select id="getUser" parameterType="String" resultType="personal.blog.vo.User" resultMap="userResultMap">
         <![CDATA[
             SELECT * FROM tbl_user
-            WHERE ID =  #{id}
+            WHERE user_name =  #{userName}
         ]]>
     </select>
 
