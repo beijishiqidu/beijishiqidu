@@ -1,14 +1,33 @@
 package personal.blog.vo;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 /**
  *
  */
-public class User {
+@Entity
+@Table(name = "tbl_user")
+public class User  implements Serializable {
 
+    /**
+     * 序列号
+     */
+    private static final long serialVersionUID = -1253098388843135918L;
+
+    @Id
+    @GeneratedValue
     private Long id;
 
+    @Column(name = "user_name")
     private String userName;
 
+    @Column(name = "password")
     private String password;
 
     public String getPassword() {

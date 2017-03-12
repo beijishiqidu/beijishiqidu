@@ -57,7 +57,7 @@ public class LoginController {
         return new ModelAndView("admin/home");
     }
 
-    @RequestMapping(value = "/loginOut.do", method = RequestMethod.GET)
+    @RequestMapping(value = "/loginout.do", method = RequestMethod.GET)
     public ModelAndView execLogoutProcess(HttpServletRequest request) {
         request.getSession().invalidate();;
         return new ModelAndView("login");

@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import personal.blog.dao.business.IUserDao;
+import personal.blog.dao.UserDao;
 import personal.blog.service.UserService;
 import personal.blog.vo.User;
 
@@ -17,17 +17,17 @@ import personal.blog.vo.User;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private IUserDao iUserDao;
+    private UserDao userDao;
 
     @Override
     public User getUser(String userID) {
-        return iUserDao.getUser(userID);
+        return userDao.getUser(userID);
     }
 
     @Override
     @Transactional
     public int insertUser(User user) {
-        return iUserDao.insertUser(user);
+        return userDao.insertUser(user);
     }
 
     @Override

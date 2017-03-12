@@ -12,16 +12,14 @@
 
     <!-- <bean id="springContextHolder" class="com.huajtech.jiahuijia.service.platform.util.SpringContextHolder" lazy-init="false" /> -->
 
-    <context:component-scan base-package="personal.blog" use-default-filters="false">
+    <context:component-scan base-package="personal.blog.service" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
-        <!--<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>-->
         <context:include-filter type="annotation" expression="org.springframework.beans.factory.annotation.Autowired"/>
-        <context:include-filter type="annotation" expression="org.springframework.beans.factory.annotation.Qualifier"/>
     </context:component-scan>
 
     <!-- 引入其他配置文件，可以为多个 -->
-    <import resource="classpath:spring-mybatis-configuration.xml" />
-    <!--<import resource="classpath:spring-hibernate.xml" />-->
+    <!-- <import resource="classpath:spring-mybatis-configuration.xml" /> -->
+    <import resource="classpath:spring-hibernate.xml" />
 
     <task:annotation-driven/>
 

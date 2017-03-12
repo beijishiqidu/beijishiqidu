@@ -13,7 +13,7 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
-	<servlet-mapping>
+	<!-- <servlet-mapping>
 		<servlet-name>default</servlet-name>
 		<url-pattern>*.jpg</url-pattern>
 	</servlet-mapping>
@@ -37,6 +37,10 @@
         <servlet-name>default</servlet-name>
         <url-pattern>*.swf</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.gif</url-pattern>
+    </servlet-mapping> -->
 
 	<!-- Spring刷新Interceptor防止内存泄漏 -->
 	<listener>

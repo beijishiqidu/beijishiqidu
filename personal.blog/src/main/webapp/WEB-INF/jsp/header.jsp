@@ -6,10 +6,9 @@
             <div class="left-area">
                 <ul>
                     <li class="first" url="${path}"><span>北极十七度主页</span></li>
-                    <li class="middle" url="${path}/type"><span>分类</span></li>
-                    <li class="last" url="${path}/message"><span>留言</span></li>
+                    <li class="middle" url="${path}/article/type"><span>分类</span></li>
                     <li class="last" url="${path}/photos"><span>相册</span></li>
-                    <li class="last" url="${path}/notes"><span>随笔</span></li>
+                    <li class="last" url="${path}/article/type?type=91"><span>随笔</span></li>
                     <li class="last" url="${path}/about"><span>关于我</span></li>
                     <div class="cl"></div>
                 </ul>

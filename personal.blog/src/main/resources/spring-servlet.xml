@@ -11,7 +11,7 @@
                         http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd">
 
     <!-- 注解扫描的包 -->
-    <context:component-scan base-package="personal.blog" use-default-filters="false">
+    <context:component-scan base-package="personal.blog.controller" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
         <context:include-filter type="annotation" expression="org.springframework.beans.factory.annotation.Autowired"/>
     </context:component-scan>
@@ -20,9 +20,7 @@
     <mvc:annotation-driven />
 
     <!-- 静态资源访问 -->
-    <mvc:resources location="/images/" mapping="/images/**" />
-    <mvc:resources location="/javascript/" mapping="/javascript/**" />
-    <mvc:resources location="/style/" mapping="/style/**" />
+    <mvc:default-servlet-handler />
 
 <!--     <mvc:view-controller path="/404" view-name="404" />
     <mvc:view-controller path="/500" view-name="500" /> -->

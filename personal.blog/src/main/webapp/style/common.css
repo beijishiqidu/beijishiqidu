@@ -99,3 +99,9 @@ input{
 	line-height:30px;
 	border:1px solid #cccccc;
 }
+
+.current_location{
+    width: 1100px;
+    margin: 0 auto 10px auto;
+    color: #666666;
+}

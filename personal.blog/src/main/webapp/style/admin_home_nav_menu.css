@@ -65,7 +65,7 @@ ul, ul li {
     width: 1280px !important;
     height: 40px;
     position: relative;
-    z-index: 9999;
+    z-index: 9;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -89,8 +89,8 @@ ul, ul li {
 }
 
 #navul>li {
-	margin-left: 20px;
-	margin-right: 20px;
+	border-right: #333 1px solid;
+    border-left: #333 1px solid;
 }
 
 #navul li a:link, #navul li a:visited {
@@ -151,6 +151,23 @@ ul, ul li {
 #navul li.navmoon ul span:hover {
     color: #0573bd;
     background: #FFF;
+}
+
+.nav_z ul li span{
+    cursor: pointer;
+}
+.logout-area{
+    color: white;
+    vertical-align: top;
+    margin-top: 6px;
+    display: inline-block;
+    margin-left: 20px;
+}
+.logout-area .logout{
+    cursor: pointer;
+}
+.logout-area .logout:hover{
+    color: red;
 }
 
 .customer-info-list table tfoot td{

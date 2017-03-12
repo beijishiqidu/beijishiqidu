@@ -10,30 +10,6 @@
     })
 </script>
 
-<style>
-    .nav_z ul li span{
-        cursor: pointer;
-    }
-    .logout-area{
-		color: white;
-		vertical-align: top;
-		margin-top: 6px;
-		display: inline-block;
-		margin-left: 20px;
-    }
-    .logout-area .logout{
-        cursor: pointer;
-    }
-    .logout-area .logout:hover{
-        color: red;
-    }
-    
-    #navul>li{
-        margin-left: 0;
-        margin-right: 0;
-    }
-</style>
-
 <div id="top_bg">
 	<div class="top">
 		<!--导航开始-->
@@ -70,7 +46,7 @@
                     </ul>
                 </li>
 			</ul>
-			<span class="logout-area">你好，北极十七度，<span class="logout" onclick="Event.openInCurrentTab('/loginOut.do')">退出</span></span>
+			<span class="logout-area">你好，北极十七度，<span class="logout" onclick="Event.openInCurrentTab('/loginout.do')">退出</span></span>
 		</div>
 		<!--导航结束-->
 		<script type="text/javascript">
