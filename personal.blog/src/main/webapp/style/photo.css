@@ -1,0 +1,56 @@
+@charset "utf-8";
+
+.photo-home-body-wapper{
+    background-image: url("../images/photos.jpg");
+}
+.photo-home-body{
+    width: 1100px;
+    margin: 0 auto;
+    height: 832px;
+    background-repeat: no-repeat;
+    background-position: center;
+    text-align: center;
+    position: relative;
+}
+
+.photo-home-body a{
+    display: inline-block;
+    height: 264px;
+    width: 436px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -218px;
+    margin-top: -132px;
+}
+
+.p-right-area{
+    float: right;
+    margin-left: 20px;
+    width: 800px;
+}
+
+.p-right-area .line-item{
+    height: 240px;
+    margin-bottom: 40px;
+}
+
+.p-right-area .line-item .rl{
+    width: 350px;
+    background-color: white;
+    float: left;
+}
+
+.p-right-area .line-item .rm{
+    width: 100px;
+}
+
+.p-right-area .line-item .rr{
+    widows: 350px;
+    background-color: white;
+    float: right;
+}
+
+.p-right-area .line-item img{
+    padding: 8px;
+}

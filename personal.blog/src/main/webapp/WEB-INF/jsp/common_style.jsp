@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="${path}/style/common.css" type="text/css" />
 <link rel="stylesheet" href="${path}/style/home.css" type="text/css" />
 <link rel="stylesheet" href="${path}/style/article.css" type="text/css" />
+<link rel="stylesheet" href="${path}/style/photo.css" type="text/css" />
 
 <style type="text/css">
     form.pagination .button{
