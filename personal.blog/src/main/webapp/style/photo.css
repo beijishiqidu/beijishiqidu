@@ -28,29 +28,97 @@
     float: right;
     margin-left: 20px;
     width: 800px;
+    padding-bottom: 240px;
 }
 
 .p-right-area .line-item{
     height: 240px;
-    margin-bottom: 40px;
 }
 
 .p-right-area .line-item .rl{
     width: 350px;
     background-color: white;
     float: left;
+    position: relative;
 }
 
 .p-right-area .line-item .rm{
     width: 100px;
+    float: left;
 }
 
 .p-right-area .line-item .rr{
     widows: 350px;
     background-color: white;
     float: right;
+    position: relative;
+}
+
+.p-right-area .navigate-v-line{
+    height: 240px;
+    float: left;
+    width: 74px;
+}
+
+.p-right-area .navigate-v-line p{
+    text-align: center;
+    color: #9bc456;
+    font-size: 20px;
+}
+
+.p-right-area .navigate-v-line i{
+    cursor: pointer;
+}
+
+.p-right-area .navigate-v-line p:first-child{
+    margin-top: 35px;
+}
+
+.p-right-area .v-line{
+    margin: 0 auto;
+    width: 2px;
+    background-color: #9bc456;
+}
+
+.height-top{
+    height: 130px;
+}
+
+.height-middle{
+    height: 45px;
+}
+
+.height-bottom{
+    height: 35px;
+}
+
+.p-right-area .line-item .triangle-right{
+    margin-top: 30px;
+}
+
+.p-right-area .line-item .triangle-left{
+    margin-top: 180px;
 }
 
 .p-right-area .line-item img{
     padding: 8px;
+    
+}
+
+.p-right-area .line-item .opacity-lay{
+    background-color: black;
+    opacity: 0.5;
+    height: 224px;
+    width: 334px;
+    position: absolute;
+    display: none;
+    left: 8px;
+    top: 8px;
+    cursor: pointer;
+}
+
+.p-right-area .line-item .opacity-lay p{
+    margin: 8px;
+    color: white;
+    font-weight: bold;
 }

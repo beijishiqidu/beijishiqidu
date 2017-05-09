@@ -9,7 +9,7 @@
                     <li class="middle" url="${path}/article/type"><span>分类</span></li>
                     <li class="last" url="${path}/photo/home"><span>相册</span></li>
                     <li class="last" url="${path}/article/type?type=91"><span>随笔</span></li>
-                    <li class="last" url="${path}/about"><span>关于我</span></li>
+                    <li class="last" url="${path}/about/me"><span>关于我</span></li>
                     <div class="cl"></div>
                 </ul>
             </div>

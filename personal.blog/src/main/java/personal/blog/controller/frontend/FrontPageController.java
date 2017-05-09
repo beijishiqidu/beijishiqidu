@@ -32,4 +32,9 @@ public class FrontPageController {
     public ModelAndView forwardPhotosDetailPage(){
         return new ModelAndView("/photo/detail");
     }
+    
+    @RequestMapping(value = "/about/me", method = RequestMethod.GET)
+    public ModelAndView forwardAboutMePage(){
+        return new ModelAndView("/about/about_me");
+    }
 }

@@ -1,6 +1,5 @@
 @charset "utf-8";
 .header-container-wrapper{
-    background-color: #9bc456;
     height: 550px;
     background-image: url("../images/bannert.jpg");
 }
@@ -54,7 +53,6 @@
 }
 
 .body-container{
-    min-height: 860px;
     margin-top: 25px;
 }
 
@@ -214,3 +212,74 @@
 .footer-container .falv-info{
     float: right;
 }
+
+.about-content-container{
+    margin: 0 auto;
+    width: 1100px;
+    background-color: white;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+}
+
+.about-content-container .photo{
+    text-align: center;
+    width: 1100px;
+}
+
+.about-content-container .photo img{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+
+.about-content-container .self-note{
+    width: 1100px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.about-content-container .self-note .content{
+    font-family:STLiti;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 0 auto;
+    width: 700px;
+}
+
+.about-content-container .self-note .sign{
+    font-size: 16px;
+    text-align: right;
+    width: 700px;
+    margin: 0 auto;
+    color: #666666;
+}
+
+.about-content-container .self-note .red-line{
+    width: 100px;
+    margin: 100px auto 0;
+    border-top: 2px solid red;
+}
+
+.about-content-container .intro-container{
+    height: 200px;
+    display: table;
+    width: 80%;
+    margin:80px auto 0 auto;
+}
+
+.about-content-container .child-div{
+    display: table-cell;
+}
+
+.about-content-container .child-div .v-line{
+    width: 280px;
+    padding-bottom: 5px;
+    color: #666666;
+}
+
+.about-content-container .child-div .title{
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333333;
+}
+

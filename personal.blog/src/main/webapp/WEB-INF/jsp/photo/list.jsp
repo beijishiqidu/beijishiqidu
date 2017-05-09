@@ -30,32 +30,64 @@
             </div>
             <div class="p-right-area">
                 <div class="line-item">
-                    <div class="rl"><img src="${path}/images/p01.png"/></div>
+                    <div class="rl"><img src="${path}/images/p01.png"/><div class="opacity-lay"><p>天空之城，永远美丽</p></div></div>
                     <div class="rm">
-                        <div class="top-area v-line">
+                        <div class="triangle-right fl"></div>
+                        <div class="navigate-v-line">
+                            <p class="top"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
+                            <div class="v-line height-top"></div>
+                            <p class="bottom"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
+                            <div class="v-line height-middle"></div>
                         </div>
-                        <div class="bottom-area v-line">
+                        <div class="triangle-left fr"></div>
+                    </div>
+                    <div class="rr"><img src="${path}/images/p02.png"/><div class="opacity-lay"><p>天空之城，永远美丽</p></div></div>
+                    <div class="cl"></div>
+                </div>
+                <div class="v-line height-bottom"></div>
+                <div class="line-item">
+                    <div class="rl"><img src="${path}/images/p03.png"/><div class="opacity-lay"><p>天空之城，永远美丽</p></div></div>
+                    <div class="rm">
+                        <div class="triangle-right fl"></div>
+                        <div class="navigate-v-line">
+                            <div class="v-line height-bottom"></div>
+                            <p class="top"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
+                            <div class="v-line height-top"></div>
+                            <p class="bottom"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
+                            <div class="v-line height-middle"></div>
+                        </div>
+                        <div class="triangle-left fr"></div>
+                    </div>
+                    <div class="rr"><img src="${path}/images/p04.png"/><div class="opacity-lay"><p>天空之城，永远美丽</p></div></div>
+                    <div class="cl"></div>
+                </div>
+                <div class="v-line height-bottom"></div>
+                <div class="line-item">
+                    <div class="rl"><img src="${path}/images/p05.png"/><div class="opacity-lay"><p>天空之城，永远美丽</p></div></div>
+                    <div class="rm">
+                        <div class="triangle-right fl"></div>
+                        <div class="navigate-v-line">
+                            <div class="v-line height-bottom"></div>
+                            <p class="top"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
+                            <div class="v-line height-top"></div>
+                            <p class="bottom"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
+                            <div class="v-line height-middle"></div>
+                        </div>
+                        <div class="triangle-left fr"></div>
+                    </div>
+                    <div class="rr"><img src="${path}/images/p06.png"/><div class="opacity-lay"><p>天空之城，永远美丽</p></div></div>
+                    <div class="cl"></div>
+                </div>
+                <div class="v-line height-bottom"></div>
+                <div class="line-item">
+                    <div class="rl"><img src="${path}/images/p07.png"/><div class="opacity-lay"><p>天空之城，永远美丽</p></div></div>
+                    <div class="rm">
+                        <div class="triangle-right fl"></div>
+                        <div class="navigate-v-line">
+                            <div class="v-line height-bottom"></div>
+                            <p class="top"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
                         </div>
                     </div>
-                    <div class="rr"><img src="${path}/images/p02.png"/></div>
-                    <div class="cl"></div>
-                </div>
-                <div class="line-item">
-                    <div class="rl"><img src="${path}/images/p03.png"/></div>
-                    <div class="rm"></div>
-                    <div class="rr"><img src="${path}/images/p04.png"/></div>
-                    <div class="cl"></div>
-                </div>
-                <div class="line-item">
-                    <div class="rl"><img src="${path}/images/p05.png"/></div>
-                    <div class="rm"></div>
-                    <div class="rr"><img src="${path}/images/p06.png"/></div>
-                    <div class="cl"></div>
-                </div>
-                <div class="line-item">
-                    <div class="rl"><img src="${path}/images/p07.png"/></div>
-                    <div class="rm"></div>
-                    <div class="rr"><img src="${path}/images/p01.png"/></div>
                     <div class="cl"></div>
                 </div>
             </div>
@@ -63,5 +95,17 @@
         </div>
     </div>
     <%@include file="../footer.jsp"%>
+    
+    <script type="text/javascript">
+    $(function(){
+        $('.p-right-area .line-item .rl, .p-right-area .line-item .rr').each(function(){
+            $(this).mouseenter(function(){
+            	$(this).find('.opacity-lay').show();
+            }).mouseleave(function(){
+            	$(this).find('.opacity-lay').hide();
+            });
+        });
+    });
+    </script>
 </body>
 </html>

@@ -105,3 +105,19 @@ input{
     margin: 0 auto 10px auto;
     color: #666666;
 }
+
+.triangle-right {
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-left: 13px solid white;
+    border-bottom: 15px solid transparent;
+}
+
+.triangle-left {
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-right: 13px solid white;
+    border-bottom: 15px solid transparent;
+}
