@@ -96,7 +96,7 @@ input[placeholder]{
 .customer-info-list table th{
 	border-top: 1px solid black;
 	border-bottom: 1px solid black;
-    height: 50px;
+    height: 30px;
 }
 
 .customer-info-list table thead th{
@@ -104,15 +104,13 @@ input[placeholder]{
 }
 
 .customer-info-list table tbody td{
-    width: 108px;
-    text-align: center;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    padding-right: 20px;
 }
 
 .customer-info-list table tbody td div{
-    width:108px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
@@ -121,8 +119,6 @@ input[placeholder]{
 .customer-info-list table tfoot td{
     width: 100%;
     text-align: right;
-    padding-top: 20px;
-    padding-bottom: 10px;
     padding-right: 10px;
 }
 
@@ -147,9 +143,13 @@ input[placeholder]{
 .main-content .error,
 .main-content .success{
 	margin-top: 0;
-	text-align: center;
+	text-align: left;
 	display: block;
 	float: none;
+}
+
+.main-content .success{
+    color: green;
 }
 
 .main-content .title-container{
@@ -157,7 +157,8 @@ input[placeholder]{
 }
 
 .main-content .title-container .title{
-	width: 1118px;
+	width: 1200px;
+	height: 30px;
 }
 
 .main-content .title-container label{

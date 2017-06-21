@@ -1,6 +1,20 @@
 package personal.blog.dao.impl;
 
-import org.hibernate.*;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import org.apache.commons.beanutils.ConvertUtils;
+import org.apache.commons.collections.CollectionUtils;
+import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
+import org.hibernate.Query;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 import org.hibernate.criterion.CriteriaSpecification;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Projection;
@@ -10,9 +24,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate4.HibernateCallback;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 import org.springframework.stereotype.Repository;
-import personal.blog.dao.GenericDao;
 
-import java.util.List;
+import personal.blog.dao.GenericDao;
 
 @Repository(value = "genericDao")
 public class GenericDaoImpl implements GenericDao {
@@ -129,8 +142,7 @@ public class GenericDaoImpl implements GenericDao {
     }
 
     @Override
-    public <T> List<T> findObjectListByHqlWithParams(final String hql, final int firstResult, final int maxResults,
-                                                     final Object... params) {
+    public <T> List<T> findObjectListByHqlWithParams(final String hql, final int firstResult, final int maxResults, final Object... params) {
         return hibernateTemplate.execute(new HibernateCallback<List<T>>() {
             @Override
             @SuppressWarnings("unchecked")
@@ -181,8 +193,7 @@ public class GenericDaoImpl implements GenericDao {
     }
 
     @Override
-    public <T> List<T> execSqlQuery(final Class<T> cls, final String sqlStr, final int firstResult,
-                                    final int maxResults, final Object... params) {
+    public <T> List<T> execSqlQuery(final Class<T> cls, final String sqlStr, final int firstResult, final int maxResults, final Object... params) {
         return hibernateTemplate.execute(new HibernateCallback<List<T>>() {
             @Override
             @SuppressWarnings("unchecked")
@@ -240,6 +251,51 @@ public class GenericDaoImpl implements GenericDao {
     @Override
     public Session openSession() {
         return hibernateTemplate.getSessionFactory().openSession();
+    }
+
+    @Override
+    public <T> List<T> getEntityObjectListByFullSql(final String fullSql, final Class<T> clzz){
+        
+        return hibernateTemplate.execute(new HibernateCallback<List<T>>() {
+            @Override
+            public List<T> doInHibernate(Session session) throws HibernateException {
+                SQLQuery sqlQuery = session.createSQLQuery(fullSql);
+                sqlQuery.setResultTransformer(CriteriaSpecification.ALIAS_TO_ENTITY_MAP);
+                @SuppressWarnings("unchecked")
+                List<Map<String, Object>> list = sqlQuery.list();
+
+                if (CollectionUtils.isEmpty(list)) {
+                    return null;
+                }
+
+                List<T> result = new ArrayList<T>();
+                try {
+                    PropertyDescriptor[] props = Introspector.getBeanInfo(clzz).getPropertyDescriptors();
+                    for (Map<String, Object> map : list) {
+                        T t = clzz.newInstance();
+                        for (Entry<String, Object> entry : map.entrySet()) {
+                            String attrName = entry.getKey();
+                            for (PropertyDescriptor prop : props) {
+                                if (!attrName.equals(prop.getName())) {
+                                    continue;
+                                }
+                                Method method = prop.getWriteMethod();
+
+                                Object value = entry.getValue();
+                                if (value != null) {
+                                    value = ConvertUtils.convert(value, prop.getPropertyType());
+                                }
+                                method.invoke(t, value);
+                            }
+                        }
+                        result.add(t);
+                    }
+                } catch (Exception e) {
+                    throw new HibernateException(e);
+                }
+                return result;
+            }
+        });
     }
 
 }

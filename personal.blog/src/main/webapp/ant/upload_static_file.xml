@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="execute">
+	<property name="local.static.file.path" location="../compressed/"></property>
+	<property name="local.images.file.path" location="../images/"></property>
+	<property name="local.javascript.file.path" location="../javascript/"></property>
+	<property name="local.style.file.path" location="../style/"></property>
+	<property name="remote.ip" value="115.28.89.112"></property>
+	<property name="remote.username" value="root"></property>
+	<property name="remote.password" value="Mybyhzzqkj88888889"></property>
+	<property name="keyfile" location="id_rsa_1024_yunquewo"></property>
+	
+	<property name="local.base.path" location="../"></property>
+	
+	<target name="execute" depends="upload_base_javascript">
+		<scp todir="${remote.username}:${remote.password}@${remote.ip}:/app/data/static/compressed" keyfile="${keyfile}" trust="true">
+			<fileset dir="${local.static.file.path}">
+			  <include name="**/*.css"/>
+			  <include name="**/*.js"/>
+			</fileset>
+		</scp>
+	</target>
+	
+	<target name="upload_base_javascript" depends="upload_base_style">
+		<scp todir="${remote.username}:${remote.password}@${remote.ip}:/app/data/static/javascript" keyfile="${keyfile}" trust="true">
+			<fileset dir="${local.javascript.file.path}">
+			  <include name="plugins/"/>
+			</fileset>
+		</scp>
+	</target>
+	
+	<target name="upload_base_style" depends="upload_base_image">
+		<scp todir="${remote.username}:${remote.password}@${remote.ip}:/app/data/static/style" keyfile="${keyfile}" trust="true">
+			<fileset dir="${local.style.file.path}">
+			  <exclude name="app/"/>
+			</fileset>
+		</scp>
+	</target>
+	
+	<target name="upload_base_image" depends="upload_extra_file">
+		<scp todir="${remote.username}:${remote.password}@${remote.ip}:/app/data/static/images" keyfile="${keyfile}" trust="true">
+			<fileset dir="${local.images.file.path}">
+			</fileset>
+		</scp>
+	</target>
+	
+	<target name="upload_extra_file">
+		<scp todir="${remote.username}:${remote.password}@${remote.ip}:/app/data/static" keyfile="${keyfile}" trust="true">
+			<fileset dir="${local.base.path}">
+			  <include name="robots.txt"/>
+			</fileset>
+		</scp>
+	</target>
+	
+</project>

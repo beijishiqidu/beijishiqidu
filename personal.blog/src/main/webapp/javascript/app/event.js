@@ -10,6 +10,12 @@ var Event = (function() {
     var openInCurrentTab = function(url){
         location.href = App.getUrlPath() + url;
     };
+    
+    var forwardBackendArticleEditPage = function(articleId) {
+        location.href = App.getUrlPath() + '/admin/article/editArticle.html?articleId=' + articleId;
+    };
+    
+    /************************************************************************************************************/
 
     var forwardAboutUsPage = function() {
         location.href = App.getUrlPath() + '/aboutUs.html';
@@ -124,9 +130,7 @@ var Event = (function() {
         openInNewTab(App.getUrlPath() + '/teamDetail.html?designerId=' + designerId);
     };
 
-    var forwardBackendNewsEditPage = function(newsId) {
-        location.href = App.getUrlPath() + '/newsEdit.html?newsId=' + newsId;
-    };
+
     
     var forwardBackendDesignerEditPage = function(designerId) {
         location.href = App.getUrlPath() + '/adminEditDesigner.html?designerId=' + designerId;
@@ -203,7 +207,7 @@ var Event = (function() {
         forwardDecorateDiaryDetailPageInNewPage: forwardDecorateDiaryDetailPageInNewPage,
         forwardDesignerDetailPageInNewPage: forwardDesignerDetailPageInNewPage,
         forwardDecorateKnowledgeDetailPageInNewPage: forwardDecorateKnowledgeDetailPageInNewPage,
-        forwardBackendNewsEditPage: forwardBackendNewsEditPage,
+        forwardBackendArticleEditPage: forwardBackendArticleEditPage,
         forwardBackendDecorateDiaryEditPage: forwardBackendDecorateDiaryEditPage,
         forwardBackendDecorateKnowledgeEditPage: forwardBackendDecorateKnowledgeEditPage,
         forwardBackendEditDesignCase: forwardBackendEditDesignCase,

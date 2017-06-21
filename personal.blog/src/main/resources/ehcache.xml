@@ -29,11 +29,11 @@
 
         -->
     <defaultCache
-        maxElementsInMemory="10000"
+        maxElementsInMemory="1000"
         eternal="false"
-        timeToIdleSeconds="600"
+        timeToIdleSeconds="120"
         timeToLiveSeconds="1200"
-        overflowToDisk="true"
+        overflowToDisk="false"
         />
 
     <!--Predefined caches.  Add your cache configuration settings here.
@@ -69,7 +69,7 @@
         eternal="false"
         timeToIdleSeconds="300"
         timeToLiveSeconds="600"
-        overflowToDisk="true"
+        overflowToDisk="false"
         />
 
     <!-- Sample cache named sampleCache2
@@ -80,7 +80,7 @@
         eternal="true"
         timeToIdleSeconds="0"
         timeToLiveSeconds="0"
-        overflowToDisk="true"
+        overflowToDisk="false"
         />
 
     <!-- Place configuration for your caches following -->
@@ -93,41 +93,14 @@
         timeToLiveSeconds="3600"
         overflowToDisk="true"
     />
-    
-    <cache
-        name="com.huajtech.jiahuijia.service.platform.vo.TipsType"
-        maxElementsInMemory="10"
-        eternal="true"
-        timeToIdleSeconds="0"
-        timeToLiveSeconds="0"
-        overflowToDisk="true"
-    />
-    
-    <cache
-        name="com.huajtech.jiahuijia.service.platform.vo.TopicType"
-        maxElementsInMemory="10"
-        eternal="true"
-        timeToIdleSeconds="0"
-        timeToLiveSeconds="0"
-        overflowToDisk="true"
-    />
-    
-    <cache
-        name="com.huajtech.jiahuijia.service.platform.vo.User"
-        maxElementsInMemory="10"
-        eternal="false"
-        timeToIdleSeconds="6000"
-        timeToLiveSeconds="3600"
-        overflowToDisk="true"
-    />
-    
-    <cache
-        name="com.huajtech.jiahuijia.service.platform.vo.BasicData"
-        maxElementsInMemory="10"
-        eternal="true"
-        timeToIdleSeconds="0"
-        timeToLiveSeconds="0"
-        overflowToDisk="true"
-    />
 
+    <cache
+        name="personal.blog.vo.ArticleType"
+        maxElementsInMemory="100"
+        eternal="true"
+        timeToIdleSeconds="0"
+        timeToLiveSeconds="0"
+        overflowToDisk="false"
+    />
+    
 </ehcache>

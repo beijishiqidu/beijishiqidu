@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="deploy">
+	<!--本地压缩css文件的路径-->
+	<property name="compressed.path" location="../compressed/"></property>
+	<property name="project.home" location="../../../../"></property>
+	<property name="current.path" location="."></property>
+	<property name="dymanic.path" location="../../../../target/jiahuijia-platform-service-0.0.1-SNAPSHOT/WEB-INF"></property>
+	<property name="remote.ip" value="115.28.89.112"></property>
+	<property name="remote.username" value="root"></property>
+	<property name="remote.password" value="Mybyhzzqkj88888889"></property>
+	<property name="keyfile" location="id_rsa_1024_yunquewo"></property>
+	
+	<target name="deploy" depends="set_tomcat2_to_online">
+		<echo message="15-完成部署"/>
+	</target>
+	
+	<target name="set_tomcat2_to_online" depends="wait_for_20s_1_1">
+		<echo message="14-设置nginx的tomcat2为上线状态"/>
+		<sshexec host="${remote.ip}" 
+				username="${remote.username}" 
+				password="${remote.password}" 
+				command="sed -i s/&quot;server localhost:18080 down;&quot;/&quot;server localhost:18080;&quot;/ /etc/nginx/nginx.conf;nginx -t;nginx -s reload" 
+				trust="true" 
+				keyfile="${keyfile}" />
+	</target>
+	
+	<target name="wait_for_20s_1_1" depends="start_tomcat2">
+		<echo message="13-1-等待30s之后进行tomcat2的上线"/>
+		<exec executable="cmd.exe">
+			<arg line="/c &quot; ping localhost -n 30 &quot;"/>
+		</exec>
+	</target>
+	
+	<target name="start_tomcat2" depends="sync_data_to_tomcat2">
+		<echo message="13-启动tomcat2"/>
+		<sshexec host="${remote.ip}" 
+				username="${remote.username}" 
+				password="${remote.password}" 
+				command="2startup.sh" 
+				trust="true" 
+				keyfile="${keyfile}" />
+	</target>
+	
+	<target name="sync_data_to_tomcat2" depends="stop_tomcat2">
+		<echo message="12-执行服务器上的同步动态代码命令"/>
+		<sshexec host="${remote.ip}" 
+				username="${remote.username}" 
+				password="${remote.password}" 
+				command="appsync" 
+				trust="true" 
+				keyfile="${keyfile}" />
+	</target>
+	
+	<target name="stop_tomcat2" depends="wait_for_20s_1">
+		<echo message="11-停止tomcat2"/>
+		<sshexec host="${remote.ip}" 
+				username="${remote.username}" 
+				password="${remote.password}" 
+				command="2shutdown.sh" 
+				trust="true" 
+				keyfile="${keyfile}" />
+	</target>
+	
+	<target name="wait_for_20s_1" depends="set_tomcat1_online_tomcat2_offline">
+		<echo message="10-等待20s"/>
+		<exec executable="cmd.exe" dir="${compressed.path}">
+			<arg line="/c &quot; ping localhost -n 20 &quot;"/>
+		</exec>
+	</target>
+	
+	<target name="set_tomcat1_online_tomcat2_offline" depends="wait_for_20s_0_1">
+		<echo message="9-设置nginx的tomcat1为上线状态，设置nginx的tomcat2为下线状态"/>
+		<sshexec host="${remote.ip}" 
+				username="${remote.username}" 
+				password="${remote.password}" 
+				command="sed -i -e s/&quot;server localhost:8080 down;&quot;/&quot;server localhost:8080;&quot;/ -e s/&quot;server localhost:18080;&quot;/&quot;server localhost:18080 down;&quot;/ /etc/nginx/nginx.conf;nginx -t;nginx -s reload" 
+				trust="true" 
+				keyfile="${keyfile}" />
+	</target>
+	
+	<target name="wait_for_20s_0_1" depends="start_tomcat1">
+		<echo message="8-1-等待30s之后进行tomcat1的上线"/>
+		<exec executable="cmd.exe">
+			<arg line="/c &quot; ping localhost -n 30 &quot;"/>
+		</exec>
+	</target>
+	
+	<target name="start_tomcat1" depends="upload_dynamic_file">
+		<echo message="8-启动tomcat1"/>
+		<sshexec host="${remote.ip}" 
+				username="${remote.username}" 
+				password="${remote.password}" 
+				command="1startup.sh" 
+				trust="true" 
+				keyfile="${keyfile}" />
+	</target>
+	
+	<target name="upload_dynamic_file" depends="stop_tomcat1">
+		<echo message="7-上传WEB-INF下除去jar包的所有文件"/>
+		<scp todir="${remote.username}:${remote.password}@${remote.ip}:/app/tomcat01/webapps/jiahuijia-platform-service/WEB-INF" keyfile="${keyfile}" trust="true">
+			<fileset dir="${dymanic.path}">
+			  <exclude name="lib/"/>
+			  <exclude name="**/spring-hibernate.xml"/>
+			</fileset>
+		</scp>
+	</target>
+	
+	<target name="stop_tomcat1" depends="upload_static_file">
+		<echo message="6-停止tomcat1"/>
+		<sshexec host="${remote.ip}" 
+				username="${remote.username}" 
+				password="${remote.password}" 
+				command="1shutdown.sh" 
+				trust="true" 
+				keyfile="${keyfile}" />
+	</target>
+	
+	<target name="upload_static_file" depends="wait_for_20s_0">
+		<echo message="5-调用子ant脚本上传静态文件，包括css,js,image等文件"/>
+		<exec executable="cmd.exe" dir="${current.path}">
+			<arg line="/c &quot; upload_static_file.bat &quot;"/>
+		</exec>
+	</target>
+	
+	<target name="wait_for_20s_0" depends="set_tomcat1_offline">
+		<echo message="4-等待20s"/>
+		<exec executable="cmd.exe">
+			<arg line="/c &quot; ping localhost -n 20 &quot;"/>
+		</exec>
+	</target>
+	
+	<target name="set_tomcat1_offline" depends="compress_css_js">
+		<echo message="3-设置nginx的tomcat1为下线状态"/>
+		<sshexec host="${remote.ip}" 
+				username="${remote.username}" 
+				password="${remote.password}" 
+				command="sed -i s/&quot;server localhost:8080;&quot;/&quot;server localhost:8080 down;&quot;/ /etc/nginx/nginx.conf;nginx -t;nginx -s reload" 
+				trust="true" 
+				keyfile="${keyfile}" />
+	</target>
+	
+	<target name="compress_css_js" depends="compile">
+		<echo message="2-调用压缩bat脚本进行压缩"/>
+		<exec executable="cmd.exe" dir="${compressed.path}">
+			<arg line="/c &quot; compress.bat &quot;"/>
+		</exec>
+	</target>
+	
+	<target name="compile">
+		<echo message="1-调用maven进行clean install"/>
+		<exec executable="cmd.exe" dir="${project.home}">
+			<arg line="/c &quot; mvn clean package install -Dmaven.test.skip=true &quot;"/>
+		</exec>
+	</target>
+	
+</project>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

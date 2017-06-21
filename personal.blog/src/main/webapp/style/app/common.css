@@ -13,6 +13,9 @@ a {
     color: #333333;
     cursor: pointer;
 }
+a:hover{
+    color: green;
+}
 
 img {
     border: 0;
@@ -95,8 +98,8 @@ li {
 }
 
 input{
-	height:40px;
-	line-height:30px;
+	/* height:40px;
+	line-height:30px; */
 	border:1px solid #cccccc;
 }
 
@@ -120,4 +123,36 @@ input{
     border-top: 15px solid transparent;
     border-right: 13px solid white;
     border-bottom: 15px solid transparent;
+}
+
+span.error-tips {
+    font-size: 12px;
+    text-align: left;
+    float: left;
+    color: red;
+    display: inline-block;
+}
+
+form.pagination {
+    margin: 40px auto;
+}
+
+form.pagination .button {
+    display: inline-block;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    color: gray;
+    font-size: 16px;
+    border: 1px solid #cecece;
+    padding: 4px;
+    cursor: pointer;
+    width: 30px;
+    margin-left: 4px;
+}
+
+form.pagination .button:hover {
+    background-color: red;
+    color: white;
+    font-size: 16px;
 }

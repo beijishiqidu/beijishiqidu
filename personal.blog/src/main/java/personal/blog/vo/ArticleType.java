@@ -1,14 +1,25 @@
 package personal.blog.vo;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+
 @Entity
 @Table(name = "tbl_article_type")
-public class ArticleType {
+@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+public class ArticleType  implements Serializable {
+
+    /**
+     * 序列号.
+     */
+    private static final long serialVersionUID = -4905637520610580955L;
 
     @Id
     @GeneratedValue

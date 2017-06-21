@@ -6,3 +6,11 @@
 <script type="text/javascript" src="${path}/javascript/jquery-ui.min.js"></script>
 <script type="text/javascript" src="${path}/javascript/jquery.ui.datepicker-zh-CN.js"></script>
 <script type="text/javascript" src="${path}/javascript/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src="${path}/javascript/common.js"></script>
+<script type="text/javascript" src="${path}/javascript/event.js"></script>
+<script type="text/javascript" src="${path}/javascript/app.js"></script>
+<script type="text/javascript">
+    $(function() {
+        App.setUrlPath("${path}");
+    })
+</script>

@@ -1,9 +1,9 @@
 package personal.blog.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
-
-import java.util.List;
 
 public interface GenericDao {
 
@@ -52,6 +52,8 @@ public interface GenericDao {
     <T> List<T> listWithCache(Class<T> cls);
 
     Session openSession();
+
+    <T> List<T> getEntityObjectListByFullSql(String fullSql, Class<T> clzz);
 
 
 }
