@@ -46,6 +46,13 @@
 	<listener>
 		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
 	</listener>
+	
+	<!-- startup utils -->
+    <servlet>
+        <servlet-name>envUtil</servlet-name>
+        <servlet-class>personal.blog.util.EnvUtil</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
 
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -85,6 +92,17 @@
 			<page-encoding>UTF-8</page-encoding>
 		</jsp-property-group>
 	</jsp-config>
+	
+	<!-- xss和sql注入攻击的过滤器 -->
+    <filter>
+        <filter-name>XssSqlFilter</filter-name>
+        <filter-class>personal.blog.filter.XssFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>XssSqlFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
 
 	<!-- 如果访问以/admin开始的url，需要检查当前session中是否有登录标志 -->
 	<filter>

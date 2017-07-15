@@ -1,7 +1,7 @@
 @charset "utf-8";
 .header-container-wrapper{
     height: 550px;
-    background-image: url("../images/bannert.jpg");
+    background-image: url("../../images/bannert.jpg");
 }
 
 .header-container{

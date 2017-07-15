@@ -4,17 +4,17 @@
 	<property name="compressed.path" location="../compressed/"></property>
 	<property name="project.home" location="../../../../"></property>
 	<property name="current.path" location="."></property>
-	<property name="dymanic.path" location="../../../../target/jiahuijia-platform-service-0.0.1-SNAPSHOT/WEB-INF"></property>
-	<property name="remote.ip" value="115.28.89.112"></property>
+	<property name="dymanic.path" location="../../../../target/personal.blog/WEB-INF"></property>
+	<property name="remote.ip" value="115.28.16.193"></property>
 	<property name="remote.username" value="root"></property>
-	<property name="remote.password" value="Mybyhzzqkj88888889"></property>
-	<property name="keyfile" location="id_rsa_1024_yunquewo"></property>
+	<property name="remote.password" value="xmwan"></property>
+	<!-- <property name="keyfile" location="id_rsa_1024_yunquewo"></property> -->
 	
-	<target name="deploy" depends="set_tomcat2_to_online">
+	<target name="deploy" depends="start_tomcat1">
 		<echo message="15-完成部署"/>
 	</target>
 	
-	<target name="set_tomcat2_to_online" depends="wait_for_20s_1_1">
+	<!-- <target name="set_tomcat2_to_online" depends="wait_for_20s_1_1">
 		<echo message="14-设置nginx的tomcat2为上线状态"/>
 		<sshexec host="${remote.ip}" 
 				username="${remote.username}" 
@@ -83,7 +83,7 @@
 		<exec executable="cmd.exe">
 			<arg line="/c &quot; ping localhost -n 30 &quot;"/>
 		</exec>
-	</target>
+	</target> -->
 	
 	<target name="start_tomcat1" depends="upload_dynamic_file">
 		<echo message="8-启动tomcat1"/>
@@ -115,17 +115,17 @@
 				keyfile="${keyfile}" />
 	</target>
 	
-	<target name="upload_static_file" depends="wait_for_20s_0">
+	<target name="upload_static_file" depends="compress_css_js">
 		<echo message="5-调用子ant脚本上传静态文件，包括css,js,image等文件"/>
 		<exec executable="cmd.exe" dir="${current.path}">
 			<arg line="/c &quot; upload_static_file.bat &quot;"/>
 		</exec>
 	</target>
 	
-	<target name="wait_for_20s_0" depends="set_tomcat1_offline">
-		<echo message="4-等待20s"/>
+	<!-- <target name="wait_for_20s_0" depends="set_tomcat1_offline">
+		<echo message="4-等待2s"/>
 		<exec executable="cmd.exe">
-			<arg line="/c &quot; ping localhost -n 20 &quot;"/>
+			<arg line="/c &quot; ping localhost -n 2 &quot;"/>
 		</exec>
 	</target>
 	
@@ -135,9 +135,8 @@
 				username="${remote.username}" 
 				password="${remote.password}" 
 				command="sed -i s/&quot;server localhost:8080;&quot;/&quot;server localhost:8080 down;&quot;/ /etc/nginx/nginx.conf;nginx -t;nginx -s reload" 
-				trust="true" 
-				keyfile="${keyfile}" />
-	</target>
+				trust="true" />
+	</target> -->
 	
 	<target name="compress_css_js" depends="compile">
 		<echo message="2-调用压缩bat脚本进行压缩"/>

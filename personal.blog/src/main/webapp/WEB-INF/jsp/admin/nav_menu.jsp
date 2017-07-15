@@ -3,7 +3,7 @@
 <c:set value="${pageContext.request.contextPath}" var="path"
 	scope="page" />
 	
-<script type="text/javascript" src="${path}/javascript/top-menu.js"></script>
+<script type="text/javascript" src="${path}/javascript/app/top-menu.js"></script>
 <script type="text/javascript">
     $(function() {
         App.setUrlPath("${path}");
