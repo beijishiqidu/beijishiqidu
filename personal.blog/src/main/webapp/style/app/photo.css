@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 .photo-home-body-wapper{
-    background-image: url("../images/photos.jpg");
+    background-image: url("/images/photos.jpg");
 }
 .photo-home-body{
     width: 1100px;

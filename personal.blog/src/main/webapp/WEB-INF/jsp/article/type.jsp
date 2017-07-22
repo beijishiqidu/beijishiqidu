@@ -19,7 +19,7 @@
                     <div class="content">
                         <ul>
                             <c:forEach items="${articleTypeCount}" var="type">
-                                <li onclick="Event.openInCurrentTab('/article/type?id=${type.typeId}')" <c:if test="${type.typeId==id}">class="article-hover"</c:if>><c:out value="${type.typeName}"></c:out>(<c:out value="${type.typeCount}"></c:out>)</li>
+                                <li onclick="Event.openInCurrentTab('/article/type/${type.typeId}')" <c:if test="${type.typeId==id}">class="article-hover"</c:if>><c:out value="${type.typeName}"></c:out>(<c:out value="${type.typeCount}"></c:out>)</li>
                             </c:forEach>
                         </ul>
                     </div>
@@ -28,7 +28,7 @@
             <div class="right-area">
                 <c:forEach items="${pagination.items}" var="item">
                     <div class="article-item">
-                        <p class="title"><a href="${path}/article/detail?articleId=${item.id}">${item.title}</a></p>
+                        <p class="title"><a href="${path}/article/detail/${item.id}">${item.title}</a></p>
                         <div class="ap-area">
                             <div class="article-ap-la">
                                 <span class="label-title">标签：</span> <span

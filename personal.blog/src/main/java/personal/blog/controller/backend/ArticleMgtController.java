@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,28 +31,22 @@ public class ArticleMgtController {
     @Autowired
     private ArticleService articleService;
 
-    @RequestMapping(method = RequestMethod.GET, value = "/home")
-    public ModelAndView backendIndex() {
-        LOGGER.error("进入了文章管理页面...");
-        return new ModelAndView("/admin/article_home");
-    }
-
-    @RequestMapping(value = "/add.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
     public ModelAndView forwardAdminHomePage(Integer firstResult, Integer maxResults) {
         ModelAndView mav = new ModelAndView("admin/article_add");
         mav.addObject("articleTypeList", articleService.getArticleTypeList());
         return mav;
     }
 
-    @RequestMapping(value = "/list.html", method = RequestMethod.GET)
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     public ModelAndView forwardNewsListPage() {
         ModelAndView mav = new ModelAndView("admin/article_list");
-        PageSplitUtil<Article> psu = articleService.getArticleListForPage(0, 10);
+        PageSplitUtil<Article> psu = articleService.getArticleListForPage(0, 10, StringUtils.EMPTY);
         mav.addObject("pagination", psu);
         return mav;
     }
 
-    @RequestMapping(value = "/saveArticle", method = RequestMethod.POST)
+    @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ModelAndView saveNewsInfo(String articleId, String title, String content, String type, HttpServletRequest request) {
 
         ArticleForm articleForm = new ArticleForm();
@@ -88,16 +83,16 @@ public class ArticleMgtController {
 
         return mav;
     }
-    
+
     @RequestMapping(value = "/deleteArticle", method = RequestMethod.POST)
     public ModelAndView deleteNews(Long articleId, Integer firstResult, Integer maxResults) {
         articleService.deleteArticleById(articleId);
         ModelAndView mav = new ModelAndView("admin/ajax_article_list");
-        PageSplitUtil<Article> psu = articleService.getArticleListForPage(firstResult, maxResults);
+        PageSplitUtil<Article> psu = articleService.getArticleListForPage(firstResult, maxResults, StringUtils.EMPTY);
         mav.addObject("pagination", psu);
         return mav;
     }
-    
+
     @RequestMapping(value = "/editArticle.html", method = RequestMethod.GET)
     public ModelAndView forwardEditNewsPage(Long articleId) {
         Article article = articleService.getArticleById(articleId);
@@ -106,11 +101,11 @@ public class ArticleMgtController {
         mav.addObject("articleTypeList", articleService.getArticleTypeList());
         return mav;
     }
-    
+
     @RequestMapping(value = "/refreshAdminArticleList.html", method = RequestMethod.GET)
     public ModelAndView ajaxRefreshNewsListPage(Integer firstResult, Integer maxResults) {
         ModelAndView mav = new ModelAndView("admin/ajax_article_list");
-        PageSplitUtil<Article> psu = articleService.getArticleListForPage(firstResult, maxResults);
+        PageSplitUtil<Article> psu = articleService.getArticleListForPage(firstResult, maxResults, StringUtils.EMPTY);
         mav.addObject("pagination", psu);
         return mav;
     }

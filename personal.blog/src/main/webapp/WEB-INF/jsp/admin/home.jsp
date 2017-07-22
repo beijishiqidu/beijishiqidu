@@ -13,18 +13,8 @@
 	scope="page" />
 <link rel="shortcut icon" href="${path}/images/logo.ico">
 <link rel="stylesheet" href="${path}/style/css/font-awesome.min.css" />
-<link rel="stylesheet" href="${path}/style/app/common.css" />
-<link rel="stylesheet" href="${path}/style/app/background.css" />
-<link rel="stylesheet" href="${path}/style/app/admin_home_nav_menu.css" />
-<script type="text/javascript" src="${path}/javascript/lib/01-jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="${path}/javascript/app/app.js"></script>
-<script type="text/javascript" src="${path}/javascript/app/event.js"></script>
-<script type="text/javascript" src="${path}/javascript/app/top-menu.js"></script>
-<script type="text/javascript">
-    $(function() {
-        App.setUrlPath("${path}");
-    })
-</script>
+<%@include file="../common_style.jsp"%>
+<%@include file="../common_javascript.jsp"%>
 </head>
 <body class="admin-home-body">
 	<div class="home">

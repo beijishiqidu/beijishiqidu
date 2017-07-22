@@ -66,6 +66,26 @@ var App = (function() {
 			$('#main-content-wrapper').html(data);
 		});
 	};
+	
+	var submitArticleTypeInfo = function() {
+        // 清除错误提示信息
+        clearErrorMsg();
+        $('#articleTypeAddForm .edui-default.edui-editor').css('border', '1px solid #d4d4d4');
+		$('#articleTypeAddForm').submit();
+	};
+
+	var submitArticleTypeInfoCallback = function(data) {
+		var data = jQuery.parseJSON(data);
+		$('#typeId').val(data.articleTypeId);
+		if (data.result == false) {
+			if (data.dbSave == true) {
+				$('#resultMsg').html('<div class="error">' + data.msg + '</div>');
+			}
+		} else {
+			$('#resultMsg').html('<div class="success">' + data.msg + '</div>');
+		}
+		$('form button').removeAttr('disabled');
+	};
 
 	/** ***************************************************************************************************************** */
 	var InitProvinceList = function() {
@@ -852,6 +872,10 @@ var App = (function() {
 		Login : Login,
 		submitArticleInfo : submitArticleInfo,
 		submitArticleInfoCallback : submitArticleInfoCallback,
+		deleteArticleById : deleteArticleById,
+		submitArticleTypeInfo : submitArticleTypeInfo,
+		submitArticleTypeInfoCallback : submitArticleTypeInfoCallback,
+		
 		InitProvinceList : InitProvinceList,
 		submitCustomerInfo : submitCustomerInfo,
 		submitCustomerDetailInfo : submitCustomerDetailInfo,
@@ -866,7 +890,6 @@ var App = (function() {
 		submitDecorateDiaryInfoCallback : submitDecorateDiaryInfoCallback,
 		submitDecorateKnowledgeInfo : submitDecorateKnowledgeInfo,
 		submitDecorateKnowledgeInfoCallback : submitDecorateKnowledgeInfoCallback,
-		deleteArticleById : deleteArticleById,
 		deleteDecorateDiaryById : deleteDecorateDiaryById,
 		deleteDesignCaseById : deleteDesignCaseById,
 		deleteFrockCaseById : deleteFrockCaseById,

@@ -224,7 +224,7 @@
     margin-bottom: 20px;
     padding-bottom: 20px;
     margin-top: -80px;
-    border: 1px solid #999999;
+    /*border: 1px solid #999999;*/
 }
 
 .about-content-container .photo{
@@ -250,15 +250,16 @@
     font-weight: bold;
     font-size: 20px;
     margin: 0 auto;
-    width: 700px;
+    width: 850px;
 }
 
 .about-content-container .self-note .sign{
     font-size: 16px;
     text-align: right;
-    width: 700px;
+    width: 800px;
     margin: 0 auto;
     color: #666666;
+    margin-top: 20px;
 }
 
 .about-content-container .self-note .red-line{

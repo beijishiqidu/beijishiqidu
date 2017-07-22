@@ -12,7 +12,7 @@ var Event = (function() {
     };
     
     var forwardBackendArticleEditPage = function(articleId) {
-        location.href = App.getUrlPath() + '/admin/article/editArticle.html?articleId=' + articleId;
+        location.href = App.getUrlPath() + '/admin/article/edit/' + articleId;
     };
     
     /************************************************************************************************************/

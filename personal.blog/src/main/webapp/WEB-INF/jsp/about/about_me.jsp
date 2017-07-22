@@ -9,7 +9,7 @@
 </head>
 <body>
     <%@include file="../header.jsp"%>
-    <div class="body-container">
+    <div class="body-container" style="background-color: white;">
         <div class="about-content-container">
             <table class="photo">
                 <tr>

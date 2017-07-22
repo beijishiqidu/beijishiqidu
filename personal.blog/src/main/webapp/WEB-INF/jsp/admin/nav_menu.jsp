@@ -2,14 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set value="${pageContext.request.contextPath}" var="path"
 	scope="page" />
-	
-<script type="text/javascript" src="${path}/javascript/app/top-menu.js"></script>
-<script type="text/javascript">
-    $(function() {
-        App.setUrlPath("${path}");
-    })
-</script>
-
+<%@include file="../common_javascript.jsp"%>
 <div id="top_bg">
 	<div class="top">
 		<!--导航开始-->
@@ -17,28 +10,20 @@
 			<ul id="navul" class="cl">
 				<li><a href="#">文章管理</a>
 					<ul>
-						<li><span onclick="Event.openInCurrentTab('/admin/article/list.html');">文章列表</span></li>
-						<li><span onclick="Event.openInCurrentTab('/admin/article/add.html');">新增文章</span></li>
-					</ul></li>
-				<li><a href="#">随笔管理</a>
-					<ul>
-						<li><span onclick="Event.openInCurrentTab('/admin/customerInfoList.html');">随笔列表</span></li>
-						<li><span onclick="Event.openInCurrentTab('/admin/customerJoinList.html');">新增随笔</span></li>
+						<li><span onclick="Event.openInCurrentTab('/admin/article/list');">文章列表</span></li>
+						<li><span onclick="Event.openInCurrentTab('/admin/article/add');">新增文章</span></li>
 					</ul></li>
 				<li><a href="#">分类管理</a>
 					<ul>
-						<li><span onclick="Event.openInCurrentTab('/admin/addDesigner.html');">新增文章分类</span></li>
-						<li><span onclick="Event.openInCurrentTab('/admin/designerList.html');">新增相册分类</span></li>
-                        <li><span onclick="Event.openInCurrentTab('/admin/designerList.html');">分类列表</span></li>
+                        <li><span onclick="Event.openInCurrentTab('/admin/type/list/article');">文章分类列表</span></li>
+                        <li><span onclick="Event.openInCurrentTab('/admin/type/list/photo');">相册分类列表</span></li>
+                        <li><span onclick="Event.openInCurrentTab('/admin/type/add/article');">增加文章分类(待实现)</span></li>
+                        <li><span onclick="Event.openInCurrentTab('/admin/type/add/photo');">增加相册分类(待实现)</span></li>
 					</ul></li>
 				<li><a href="#">相册管理</a>
 					<ul>
-						<li><span onclick="Event.openInCurrentTab('/admin/designCaseList.html');">相册列表</span></li>
-						<li><span onclick="Event.openInCurrentTab('/admin/addDesignCase.html');">新增相册</span></li>
-					</ul></li>
-				<li><a href="#">其他</a>
-					<ul>
-						<li><span onclick="Event.openInCurrentTab('/admin/contactUs.html');">关于我</span></li>
+						<li><span onclick="Event.openInCurrentTab('/admin/photo/manage/list');">相册列表</span></li>
+						<li><span onclick="Event.openInCurrentTab('/admin/photo/add');">新增相册</span></li>
 					</ul></li>
 				<li><a href="#">系统管理</a>
                     <ul>

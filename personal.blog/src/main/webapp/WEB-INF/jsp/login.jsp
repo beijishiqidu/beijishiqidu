@@ -9,11 +9,15 @@
 <link rel="shortcut icon" href="${path}/images/logo.ico"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE"/>
 
-<link rel="stylesheet" href="${path}/style/common.css" />
+<%-- <link rel="stylesheet" href="${path}/style/common.css" />
 <link rel="stylesheet" href="${path}/style/background.css" />
 
 <script type="text/javascript" src="${path}/javascript/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="${path}/javascript/app.js"></script>
+<script type="text/javascript" src="${path}/javascript/app.js"></script> --%>
+
+<%@include file="common_style.jsp"%>
+<%@include file="common_javascript.jsp"%>
+
 <style type="text/css">
     #resultMsg{
         float: none;

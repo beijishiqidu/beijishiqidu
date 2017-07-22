@@ -42,4 +42,9 @@ public final class ApplicationConstant {
      * span的结束标记.
      */
     public static final String SPAN_END = "</span>";
+
+    /**
+     * 浏览次数在session中的标记.
+     */
+    public static final String SCAN_TIMES_POOL = "SCAN_TIMES_POOL";
 }

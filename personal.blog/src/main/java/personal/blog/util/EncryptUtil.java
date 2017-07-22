@@ -166,5 +166,6 @@ public class EncryptUtil {
     public static void main(String[] args) {
         String pwd = EncryptUtil.encode("beijishiqidu");
         System.out.println(pwd);
+        //YmVpamlzaGlxaWR1
     }
 }

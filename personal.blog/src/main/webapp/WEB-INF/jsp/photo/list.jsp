@@ -18,12 +18,9 @@
                     </div>
                     <div class="content">
                         <ul>
-                            <li>个人写真(25)</li>
-                            <li>生活照(20)</li>
-                            <li>工作照(12)</li>
-                            <li>游玩照(35)</li>
-                            <li>在他乡(75)</li>
-                            <li>所见(145)</li>
+                            <c:forEach items="${photoTypeCount}" var="type">
+                                <li onclick="Event.openInCurrentTab('/photo/list/${type.typeId}')" <c:if test="${type.typeId==id}">class="article-hover"</c:if>><c:out value="${type.typeName}"></c:out>(<c:out value="${type.typeCount}"></c:out>)</li>
+                            </c:forEach>
                         </ul>
                     </div>
                 </div>
@@ -34,7 +31,7 @@
                     <div class="rm">
                         <div class="triangle-right fl"></div>
                         <div class="navigate-v-line">
-                            <p class="top"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
+                            <p ><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
                             <div class="v-line height-top"></div>
                             <p class="bottom"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
                             <div class="v-line height-middle"></div>
@@ -51,7 +48,7 @@
                         <div class="triangle-right fl"></div>
                         <div class="navigate-v-line">
                             <div class="v-line height-bottom"></div>
-                            <p class="top"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
+                            <p ><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
                             <div class="v-line height-top"></div>
                             <p class="bottom"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
                             <div class="v-line height-middle"></div>
@@ -68,7 +65,7 @@
                         <div class="triangle-right fl"></div>
                         <div class="navigate-v-line">
                             <div class="v-line height-bottom"></div>
-                            <p class="top"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
+                            <p ><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
                             <div class="v-line height-top"></div>
                             <p class="bottom"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
                             <div class="v-line height-middle"></div>
@@ -85,7 +82,7 @@
                         <div class="triangle-right fl"></div>
                         <div class="navigate-v-line">
                             <div class="v-line height-bottom"></div>
-                            <p class="top"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
+                            <p ><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
                         </div>
                     </div>
                     <div class="cl"></div>

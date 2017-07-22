@@ -98,8 +98,8 @@ li {
 }
 
 input{
-	/* height:40px;
-	line-height:30px; */
+	height:40px;
+	/*line-height:30px; */
 	border:1px solid #cccccc;
 }
 
@@ -134,7 +134,7 @@ span.error-tips {
 }
 
 form.pagination {
-    margin: 40px auto;
+    margin: 10px auto;
 }
 
 form.pagination .button {
@@ -152,7 +152,7 @@ form.pagination .button {
 }
 
 form.pagination .button:hover {
-    background-color: red;
+    background-color: green;
     color: white;
     font-size: 16px;
 }

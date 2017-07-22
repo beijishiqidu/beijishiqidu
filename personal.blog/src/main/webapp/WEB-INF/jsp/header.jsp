@@ -8,7 +8,7 @@
                     <li class="first" url="${path}/"><span>北极十七度主页</span></li>
                     <li class="middle" url="${path}/article/type"><span>分类</span></li>
                     <li class="last" url="${path}/photo/home"><span>相册</span></li>
-                    <li class="last" url="${path}/article/type?type=91"><span>随笔</span></li>
+                    <li class="last" url="${path}/article/type/91"><span>随笔</span></li>
                     <li class="last" url="${path}/about/me"><span>关于我</span></li>
                     <div class="cl"></div>
                 </ul>

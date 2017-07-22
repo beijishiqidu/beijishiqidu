@@ -11,7 +11,7 @@
     <%@include file="../inner-header.jsp"%>
     <div class="photo-home-body-wapper">
         <div class="photo-home-body">
-            <a href="${path}/photo/list"><img src="../images/p1.jpg"></a>
+            <a href="${path}/photo/list"><img src="/images/p1.jpg"></a>
         </div> 
     </div>
     <%@include file="../footer.jsp"%>

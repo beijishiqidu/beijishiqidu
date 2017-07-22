@@ -110,7 +110,7 @@ public class PageSplitTag extends BodyTagSupport {
         count = endIndex;
         for (; index <= count; index++) {
             if (currentIndex + 1 == indexs[index]) {
-                txt.append("<span class=\"button\" style=\"background-color:red;color:#ffffff\">" + indexs[index] + "</span>");
+                txt.append("<span class=\"button\" style=\"background-color:green;color:#ffffff\">" + indexs[index] + "</span>");
             } else {
                 String params =
                         "firstResult=" + (indexs[index] - 1) * pageUtil.getPageSize() + "&maxResults=" + pageUtil.getPageSize() + getQueryParams();

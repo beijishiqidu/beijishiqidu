@@ -23,7 +23,7 @@ import personal.blog.util.WebApplicationContextUtil;
 public class CheckLoginFilter implements Filter {
 
     private static final Logger LOGGER = Logger.getLogger(CheckLoginFilter.class);
-    
+
     @Override
     public void destroy() {
 
@@ -40,7 +40,9 @@ public class CheckLoginFilter implements Filter {
         request.setAttribute("localEnv", EnvUtil.isLocalEnv());
         request.setAttribute("prodEnv", EnvUtil.isProdEnv());
         request.setAttribute("testIe8Env", EnvUtil.isTestIe8Env());
-        
+
+        LOGGER.info("===>" + request.getRequestURL());
+
         String globalUrl = WebApplicationContextUtil.getGlobalValueFromApplication(GlobalValueKey.URL_PATH);
         if (globalUrl == null) {
             String tempContextUrl = null;
@@ -73,12 +75,9 @@ public class CheckLoginFilter implements Filter {
             StringBuilder javascriptLibPathBuilder = new StringBuilder();
             StringBuilder stylePathBuilder = new StringBuilder();
 
-            javascriptPathBuilder.append(file.getCanonicalPath()).append(File.separator).append("javascript")
-                    .append(File.separator).append("app");
-            javascriptLibPathBuilder.append(file.getCanonicalPath()).append(File.separator).append("javascript")
-                    .append(File.separator).append("lib");
-            stylePathBuilder.append(file.getCanonicalPath()).append(File.separator).append("style")
-                    .append(File.separator).append("app");
+            javascriptPathBuilder.append(file.getCanonicalPath()).append(File.separator).append("javascript").append(File.separator).append("app");
+            javascriptLibPathBuilder.append(file.getCanonicalPath()).append(File.separator).append("javascript").append(File.separator).append("lib");
+            stylePathBuilder.append(file.getCanonicalPath()).append(File.separator).append("style").append(File.separator).append("app");
 
             File[] cssAppFiles = new File(stylePathBuilder.toString()).listFiles(new FileFilter() {
                 @Override
@@ -113,7 +112,7 @@ public class CheckLoginFilter implements Filter {
             request.setAttribute("jsLibFiles", jsLibFiles);
             request.setAttribute("cssAppFiles", cssAppFiles);
         }
-        
+
         String url = request.getRequestURI();
         String context = request.getContextPath();
         String filterUrl = "/admin/";

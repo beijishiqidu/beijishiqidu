@@ -86,8 +86,6 @@ input[placeholder]{
 }
 
 .customer-info-list table{
-    border-collapse: collapse;
-	border-spacing: 0;
 	margin:  auto;
 	table-layout: fixed;
 }
@@ -229,8 +227,8 @@ input[placeholder]{
 }
 
 .login .field img{
-	width: 41px; 
-	height: 42px;
+	width: 40px; 
+	height: 40px;
     position: absolute;
     left: 28px;
     top: 1px;

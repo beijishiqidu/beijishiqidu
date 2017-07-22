@@ -11,7 +11,7 @@ import personal.blog.vo.ArticleType;
 
 public interface ArticleService {
 
-    PageSplitUtil<Article> getArticleListForPage(Integer firstResult, Integer maxResults);
+    PageSplitUtil<Article> getArticleListForPage(Integer firstResult, Integer maxResults, String typeId);
 
     Article getArticleById(Long articleId);
 
@@ -26,5 +26,7 @@ public interface ArticleService {
     List<ArticleType> getArticleTypeList();
 
     List<TypeCount> getArticleTypeCount();
+
+    Long saveArticleTypeInfo(String typeId, String typeName);
 
 }
