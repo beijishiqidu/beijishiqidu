@@ -15,6 +15,10 @@ var Event = (function() {
         location.href = App.getUrlPath() + '/admin/article/edit/' + articleId;
     };
     
+    var forwardBackendPhotoDetailPage = function(typeId) {
+    	location.href = App.getUrlPath() + '/admin/photo/manage/detail/' + typeId;
+    }
+    
     /************************************************************************************************************/
 
     var forwardAboutUsPage = function() {
@@ -208,6 +212,7 @@ var Event = (function() {
         forwardDesignerDetailPageInNewPage: forwardDesignerDetailPageInNewPage,
         forwardDecorateKnowledgeDetailPageInNewPage: forwardDecorateKnowledgeDetailPageInNewPage,
         forwardBackendArticleEditPage: forwardBackendArticleEditPage,
+        forwardBackendPhotoDetailPage: forwardBackendPhotoDetailPage,
         forwardBackendDecorateDiaryEditPage: forwardBackendDecorateDiaryEditPage,
         forwardBackendDecorateKnowledgeEditPage: forwardBackendDecorateKnowledgeEditPage,
         forwardBackendEditDesignCase: forwardBackendEditDesignCase,

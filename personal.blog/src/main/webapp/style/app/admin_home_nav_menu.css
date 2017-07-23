@@ -30,7 +30,7 @@ a:link, a:visited {
 }
 
 a:hover, a:focus {
-    text-decoration: underline;
+    text-decoration: none;
     color: #0573bd;
     text-decoration: none;
 }

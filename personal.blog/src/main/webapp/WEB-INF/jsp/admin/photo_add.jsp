@@ -11,16 +11,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <c:set value="${pageContext.request.contextPath}" var="path"
     scope="page" />
-<%@include file="../common_style.jsp"%>
 <%@include file="../common_javascript.jsp"%>
 
-<link rel="stylesheet" type="text/css" href="${path}/webfileupload/css/bootstrap.min.css" />
-<link rel="stylesheet" type="text/css" href="${path}/webfileupload/css/bootstrap-theme.min.css" />
 <link rel="stylesheet" type="text/css" href="${path}/style/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="${path}/webfileupload/css/syntax.css" />
 <link rel="stylesheet" type="text/css" href="${path}/webfileupload/css/style.css" />
 <link rel="stylesheet" type="text/css" href="${path}/webfileupload/css/webuploader.css" />
 <link rel="stylesheet" type="text/css" href="${path}/webfileupload/css/demo.css" /> 
+<%@include file="../common_style.jsp"%>
 </head>
 <body class="admin-home-body">
     <div class="home">
@@ -33,10 +31,10 @@
                         id="main-content-wrapper">
                         <input type="hidden" value="${path}" id="path">
                         <form id="articleAddForm" method="post"
-                            enctype="multipart/form-data"
+                            
                             target="hideframe"
-                            action="<c:url value="/admin/article/save"/>">
-                            <input name="articleId" id="articleId"
+                            action="<c:url value="/admin/photo/save"/>">
+                            <input name="articleId" id="photoId"
                                 value="${articleObj.id}" type="hidden" />
                             <div class="title-container">
                                 <label>相册标题:</label><input name="title"
@@ -45,7 +43,8 @@
                                     data-name="title" class="error-tips"></span>
                             </div>
                             <div class="title-container">
-                            <label class="case-description">相册:</label><select id="type" name="type" style="width: 1200px;height: 30px;">
+                            <label class="case-description">相册:</label>
+                                <select id="type" name="type" style="width: 1200px;height: 30px;">
                                     <option value="">请选择相册</option>
                                     <c:forEach items="${photoTypeList}" var="list">
                                         <c:set var="articleTypeSelected" value="${articleObj.type.id==list.id?'selected=\"selected\"':''}"/>
@@ -78,7 +77,7 @@
                             <span data-name="content" class="error-tips"></span>
                             <div class="button-area">
                                 <button type="button"
-                                    onclick="App.submitArticleInfo();">保存</button>
+                                    onclick="App.submitPhotoInfo();">保存</button>
                                 <div class="clear-float"></div>
                                 <div id="resultMsg" class=""></div>
                             </div>

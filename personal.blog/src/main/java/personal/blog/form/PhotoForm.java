@@ -10,6 +10,9 @@ public class PhotoForm {
     @NotBlank(message = "相册的分类不能为空")
     private String type;
 
+    @NotBlank(message = "请上传相片")
+    private String content;
+
     public String getTitle() {
         return title;
     }
@@ -25,4 +28,13 @@ public class PhotoForm {
     public void setType(String type) {
         this.type = type;
     }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+    
 }

@@ -47,4 +47,9 @@ public final class ApplicationConstant {
      * 浏览次数在session中的标记.
      */
     public static final String SCAN_TIMES_POOL = "SCAN_TIMES_POOL";
+
+    /**
+     * 上传时的图片.
+     */
+    public static final String SESSION_PHOTO_UPLOAD_LIST = "SESSION_PHOTO_UPLOAD_LIST";
 }

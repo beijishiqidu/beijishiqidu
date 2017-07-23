@@ -21,6 +21,8 @@ public class EnvUtil extends GenericServlet {
 
     private static String releaseVersion;
 
+    private static String url;
+
     @Override
     public void init() throws ServletException {
         super.init();
@@ -35,8 +37,10 @@ public class EnvUtil extends GenericServlet {
         String os = System.getProperty("os.name");
         if (os.contains("Linux")) {
             setProdEnv(true);
+            url = "//www.beijishiqidu.com/";
         } else {
             setLocalEnv(true);
+            url = "//local.beijishiqidu.com/";
         }
     }
 
@@ -94,6 +98,10 @@ public class EnvUtil extends GenericServlet {
 
         Matcher m = p.matcher(url);
         return m.find();
+    }
+
+    public static String getUrl() {
+        return url;
     }
 
 }

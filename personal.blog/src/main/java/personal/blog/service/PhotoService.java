@@ -19,11 +19,11 @@ public interface PhotoService {
 
     List<FormAlert> validatePhotoForm(PhotoForm articleForm);
 
-    Long savePhotoInfo(String photoId, String title, String type);
+    Long savePhotoInfo(String photoId, String title, String type, List<Photo> list);
 
     void deletePhotoById(Long photoId);
 
     Photo getPhotoById(Long photoId);
 
-    
+
 }

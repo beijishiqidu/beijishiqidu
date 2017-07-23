@@ -86,6 +86,39 @@ var App = (function() {
 		}
 		$('form button').removeAttr('disabled');
 	};
+	
+	
+	var submitPhotoInfo = function() {
+        // 清除错误提示信息
+        clearErrorMsg();
+        $('#uploader').css('border', '1px solid #d4d4d4');
+        console.log($("#articleAddForm").serialize());
+		$('#articleAddForm').submit();
+	};
+
+	var submitPhotoInfoCallback = function(data) {
+		var data = jQuery.parseJSON(data);
+		$('#photoId').val(data.photoId);
+		if (data.result == false) {
+			if (data.dbSave == true) {
+				$('#resultMsg').html('<div class="error">' + data.msg + '</div>');
+			} else {
+				data.msg = Common.sortJsonDataByKey(data.msg, 'value');
+				for (var i = 0; i < data.msg.length; i++) {
+					$('#articleAddForm input[name="' + data.msg[i].name + '"]').css('border', '1px solid red');
+					$('#articleAddForm select[name="'+ data.msg[i].name + '"]').css('border', '1px solid red');
+					$('#articleAddForm span[data-name=' + data.msg[i].name + ']').html(data.msg[i].value);
+					if ('content' == data.msg[i].name) {
+						$('#uploader').css('border', '1px solid red');
+					}
+				}
+			}
+		} else {
+			$('#resultMsg').html('<div class="success">' + data.msg + '</div>');
+			//setTimeout("top.location.href='" + App.getUrlPath()+ "/admin/newsList.html" + "'", 1000);
+		}
+		$('form button').removeAttr('disabled');
+	};
 
 	/** ***************************************************************************************************************** */
 	var InitProvinceList = function() {
@@ -875,6 +908,8 @@ var App = (function() {
 		deleteArticleById : deleteArticleById,
 		submitArticleTypeInfo : submitArticleTypeInfo,
 		submitArticleTypeInfoCallback : submitArticleTypeInfoCallback,
+		submitPhotoInfo : submitPhotoInfo,
+		submitPhotoInfoCallback : submitPhotoInfoCallback,
 		
 		InitProvinceList : InitProvinceList,
 		submitCustomerInfo : submitCustomerInfo,

@@ -1,6 +1,7 @@
 package personal.blog.service.impl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -11,15 +12,20 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import personal.blog.cache.TypeCount;
 import personal.blog.dao.GenericDao;
 import personal.blog.form.FormAlert;
 import personal.blog.form.PhotoForm;
 import personal.blog.service.PhotoService;
+import personal.blog.util.FormValidateUtil;
 import personal.blog.util.PageSplitUtil;
 import personal.blog.vo.Photo;
+import personal.blog.vo.PhotoAlbum;
 import personal.blog.vo.PhotoType;
 
 @Service
@@ -42,7 +48,8 @@ public class PhotoServiceImpl implements PhotoService {
 
         if (StringUtils.isNotEmpty(typeId)) {
             PhotoType type = genericDao.getObject(PhotoType.class, typeId);
-            dc.add(Restrictions.eq("type", type));
+            dc.createAlias("album", "album");
+            dc.add(Restrictions.eq("album.type", type));
         }
         Long totalCount = genericDao.findCountByCriteria(dc);
 
@@ -71,7 +78,8 @@ public class PhotoServiceImpl implements PhotoService {
     // @Cacheable(value = "org.hibernate.cache.internal.StandardQueryCache")
     public List<TypeCount> getPhotoTypeCount() {
         List<TypeCount> list =
-                genericDao.getEntityObjectListByFullSql("select a.type typeId,count(a.id) as typeCount from tbl_photo a group by a.type",
+                genericDao.getEntityObjectListByFullSql(
+                        "select ab.type typeId,count(a.id) as typeCount from tbl_photo a, tbl_photo_album ab where a.album=ab.id group by a.album",
                         TypeCount.class);
         List<PhotoType> typeList = getPhotoTypeList();
 
@@ -100,16 +108,47 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    public List<FormAlert> validatePhotoForm(PhotoForm articleForm) {
-        // TODO Auto-generated method stub
-        return null;
+    public List<FormAlert> validatePhotoForm(PhotoForm photoForm) {
+        return FormValidateUtil.validate(photoForm);
     }
 
 
     @Override
-    public Long savePhotoInfo(String photoId, String title, String type) {
-        // TODO Auto-generated method stub
-        return null;
+    @Transactional(rollbackFor = DataAccessException.class, propagation = Propagation.REQUIRED)
+    public Long savePhotoInfo(String photoId, String title, String type, List<Photo> list) {
+
+        PhotoAlbum pa = null;
+
+        PhotoType pt = genericDao.getObject(PhotoType.class, type);
+        if (StringUtils.isEmpty(photoId)) {
+            pa = new PhotoAlbum();
+            pa.setScanTimes(0L);
+            pa.setCreateDate(Calendar.getInstance());
+            pa.setType(pt);
+            pa.setTitle(title);
+        } else {
+            pa = genericDao.getObject(PhotoAlbum.class, photoId);
+            pa.setTitle(title);
+            pa.setType(pt);
+            pa.setUpdateDate(Calendar.getInstance());
+        }
+
+        genericDao.saveOrUpdateObject(pa);
+
+        // DetachedCriteria dc = DetachedCriteria.forClass(Photo.class);
+        // dc.add(Restrictions.eq("album", pa));
+        // List<Photo> photoList = genericDao.findRowsByCriteria(dc, 0, 999);
+
+        for (Photo photo : list) {
+            photo.setCreateDate(Calendar.getInstance());
+            photo.setUpdateDate(Calendar.getInstance());
+            photo.setAlbum(pa);
+            photo.setScanTimes(0L);
+            genericDao.saveObject(photo);
+            LOGGER.info("photo===>" + photo.getFilePath() + "==>" + photo.getUrlPath());
+        }
+
+        return pa.getId();
     }
 
 

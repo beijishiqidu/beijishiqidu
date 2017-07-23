@@ -12,22 +12,19 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tbl_photo")
-public class Photo {
+@Table(name = "tbl_photo_album")
+public class PhotoAlbum {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER, targetEntity = PhotoAlbum.class)
-    @JoinColumn(name = "album")
-    private PhotoAlbum album;
-    
-    @Column(name = "file_path")
-    private String filePath;
+    @Column(name = "title")
+    private String title;
 
-    @Column(name = "url_path")
-    private String urlPath;
+    @ManyToOne(fetch = FetchType.EAGER, targetEntity = PhotoType.class)
+    @JoinColumn(name = "type")
+    private PhotoType type;
 
     @Column(name = "create_date")
     private Calendar createDate;
@@ -46,6 +43,14 @@ public class Photo {
         this.id = id;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public Calendar getCreateDate() {
         return createDate;
     }
@@ -62,35 +67,19 @@ public class Photo {
         this.updateDate = updateDate;
     }
 
+    public PhotoType getType() {
+        return type;
+    }
+
+    public void setType(PhotoType type) {
+        this.type = type;
+    }
+
     public Long getScanTimes() {
         return scanTimes;
     }
 
     public void setScanTimes(Long scanTimes) {
         this.scanTimes = scanTimes;
-    }
-
-    public String getFilePath() {
-        return filePath;
-    }
-
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
-    }
-
-    public String getUrlPath() {
-        return urlPath;
-    }
-
-    public void setUrlPath(String urlPath) {
-        this.urlPath = urlPath;
-    }
-
-    public PhotoAlbum getAlbum() {
-        return album;
-    }
-
-    public void setAlbum(PhotoAlbum album) {
-        this.album = album;
     }
 }

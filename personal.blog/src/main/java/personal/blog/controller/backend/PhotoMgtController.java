@@ -1,25 +1,21 @@
 package personal.blog.controller.backend;
 
 import java.io.File;
-import java.io.FileFilter;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.channels.FileChannel;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileItemFactory;
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FileUtils;
@@ -34,9 +30,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import personal.blog.cache.TypeCount;
+import personal.blog.constant.ApplicationConstant;
 import personal.blog.form.FormAlert;
 import personal.blog.form.PhotoForm;
 import personal.blog.service.PhotoService;
+import personal.blog.util.EnvUtil;
 import personal.blog.util.PageSplitUtil;
 import personal.blog.vo.Photo;
 
@@ -51,10 +49,20 @@ public class PhotoMgtController {
     @Autowired
     private PhotoService photoService;
 
+    @SuppressWarnings("unchecked")
     @RequestMapping(value = "/add", method = RequestMethod.GET)
-    public ModelAndView forwardAddPage(Integer firstResult, Integer maxResults) {
+    public ModelAndView forwardAddPage(HttpServletRequest request, Integer firstResult, Integer maxResults) {
         ModelAndView mav = new ModelAndView("admin/photo_add");
         mav.addObject("photoTypeList", photoService.getPhotoTypeList());
+
+        HttpSession session = request.getSession();
+        if (null == session.getAttribute(ApplicationConstant.SESSION_PHOTO_UPLOAD_LIST)) {
+            session.setAttribute(ApplicationConstant.SESSION_PHOTO_UPLOAD_LIST, new ArrayList<Photo>());
+        } else {
+            List<Photo> list = (List<Photo>) session.getAttribute(ApplicationConstant.SESSION_PHOTO_UPLOAD_LIST);
+            list.clear();
+        }
+
         return mav;
     }
 
@@ -66,20 +74,24 @@ public class PhotoMgtController {
         return mav;
     }
 
-    @RequestMapping(value = "manage/detail", method = RequestMethod.GET)
-    public ModelAndView forwardPhotoImageListPage() {
+    @RequestMapping(value = "/manage/detail", method = RequestMethod.GET)
+    public ModelAndView forwardPhotoImageListPage(String albumId) {
         ModelAndView mav = new ModelAndView("admin/photo_detail");
-        PageSplitUtil<Photo> psu = photoService.getPhotoListForPage(0, 999, StringUtils.EMPTY);
+        PageSplitUtil<Photo> psu = photoService.getPhotoListForPage(0, 999, albumId);
         mav.addObject("pagination", psu);
         return mav;
     }
 
+    @SuppressWarnings("unchecked")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public ModelAndView savePhotoInfo(String photoId, String title, String type, HttpServletRequest request) {
+
+        List<Photo> list = (List<Photo>) request.getSession().getAttribute(ApplicationConstant.SESSION_PHOTO_UPLOAD_LIST);
 
         PhotoForm photoForm = new PhotoForm();
         photoForm.setTitle(title);
         photoForm.setType(type);
+        photoForm.setContent(list.isEmpty() ? StringUtils.EMPTY : list.toString());
 
         List<FormAlert> resultList = photoService.validatePhotoForm(photoForm);
 
@@ -89,7 +101,8 @@ public class PhotoMgtController {
             returnMap.put("msg", resultList);
         } else {
             try {
-                Long id = photoService.savePhotoInfo(photoId, title, type);
+
+                Long id = photoService.savePhotoInfo(photoId, title, type, list);
                 returnMap.put("result", true);
                 returnMap.put("msg", "保存成功");
                 returnMap.put("photoId", id);
@@ -138,148 +151,9 @@ public class PhotoMgtController {
     }
 
     @SuppressWarnings("unchecked")
-    @RequestMapping(value = "/upload/chunk/item", method = RequestMethod.POST)
-    public void uploadPhotoChunk(HttpServletRequest request, HttpServletResponse response) {
-
-        LOGGER.info("==========/upload/chunk/item");
-
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        ServletFileUpload sfu = new ServletFileUpload(factory);
-        sfu.setHeaderEncoding("utf-8");
-
-        String savePath = "D:\\dev\\apache-tomcat-7.0.67\\upload\\image\\webuploader\\photo\\";// request.getContextPath();//
-                                                                                               // TODO
-        String fileMd5 = null;
-        String chunk = null;
-
-        try {
-            List<FileItem> items = sfu.parseRequest(request);
-
-            for (FileItem item : items) {
-                if (item.isFormField()) {
-                    String fieldName = item.getFieldName();
-                    if (fieldName.equals("fileMd5")) {
-                        fileMd5 = item.getString("utf-8");
-                    }
-                    if (fieldName.equals("chunk")) {
-                        chunk = item.getString("utf-8");
-                    }
-                } else {
-                    File file = new File(savePath + "/" + fileMd5);
-                    if (!file.exists()) {
-                        file.mkdir();
-                    }
-                    File chunkFile = new File(savePath + "/" + fileMd5 + "/" + chunk);
-                    FileUtils.copyInputStreamToFile(item.getInputStream(), chunkFile);
-
-                }
-            }
-
-        } catch (IOException e) {
-            LOGGER.error(e.getMessage(), e);
-        } catch (FileUploadException e) {
-            LOGGER.error(e.getMessage(), e);
-        }
-
-    }
-
-
-    @RequestMapping(value = "/upload/chunk/merge", method = RequestMethod.POST)
-    public void uploadPhotoMergeChunk(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        LOGGER.info("==========/upload/chunk/merge");
-
-        String savePath = "D:\\dev\\apache-tomcat-7.0.67\\upload\\image\\webuploader\\photo\\";// request.getContextPath();//
-                                                                                               // TODO
-        // 合并文件
-        // 需要合并的文件的目录标记
-        String fileMd5 = request.getParameter("fileMd5");
-
-        // 读取目录里的所有文件
-        File f = new File(savePath + "/" + fileMd5);
-        File[] fileArray = f.listFiles(new FileFilter() {
-            // 排除目录只要文件
-            @Override
-            public boolean accept(File pathname) {
-                // TODO Auto-generated method stub
-                if (pathname.isDirectory()) {
-                    return false;
-                }
-                return true;
-            }
-        });
-
-        // 转成集合，便于排序
-        List<File> fileList = new ArrayList<File>(Arrays.asList(fileArray));
-        Collections.sort(fileList, new Comparator<File>() {
-            @Override
-            public int compare(File o1, File o2) {
-                // TODO Auto-generated method stub
-                if (Integer.parseInt(o1.getName()) < Integer.parseInt(o2.getName())) {
-                    return -1;
-                }
-                return 1;
-            }
-        });
-        // UUID.randomUUID().toString()-->随机名
-        File outputFile = new File(savePath + "/" + fileMd5 + ".png");
-        // 创建文件
-        outputFile.createNewFile();
-        // 输出流
-        FileChannel outChnnel = new FileOutputStream(outputFile).getChannel();
-        // 合并
-        FileChannel inChannel;
-        for (File file : fileList) {
-            inChannel = new FileInputStream(file).getChannel();
-            inChannel.transferTo(0, inChannel.size(), outChnnel);
-            inChannel.close();
-            // 删除分片
-            file.delete();
-        }
-        outChnnel.close();
-        // 清除文件夹
-        File tempFile = new File(savePath + "/" + fileMd5);
-        if (tempFile.isDirectory() && tempFile.exists()) {
-            tempFile.delete();
-        }
-        LOGGER.info("合并成功");
-
-    }
-
-    @RequestMapping(value = "/upload/chunk/check", method = RequestMethod.POST)
-    public void uploadPhotoCheckChunk(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        LOGGER.info("==========/upload/chunk/check");
-
-        String savePath = "D:\\dev\\apache-tomcat-7.0.67\\upload\\image\\webuploader\\photo";// request.getContextPath();//
-                                                                                             // TODO
-        savePath = savePath + "\\";
-
-        // 检查当前分块是否上传成功
-        String fileMd5 = request.getParameter("fileMd5");
-        String chunk = request.getParameter("chunk");
-        String chunkSize = request.getParameter("chunkSize");
-
-        File checkFile = new File(savePath + "/" + fileMd5 + "/" + chunk);
-
-        response.setContentType("text/html;charset=utf-8");
-        // 检查文件是否存在，且大小是否一致
-        if (checkFile.exists() && checkFile.length() == Integer.parseInt(chunkSize)) {
-            // 上传过
-            response.getWriter().write("{\"ifExist\":1}");
-        } else {
-            // 没有上传过
-            response.getWriter().write("{\"ifExist\":0}");
-        }
-    }
-
-
-    @SuppressWarnings("unchecked")
     @RequestMapping(value = "/upload/chunk/submit", method = RequestMethod.POST)
     @ResponseBody
     public void uploadPhoto(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
-        LOGGER.info("==========/upload/chunk/submit");
 
         try {
             boolean isMultipart = ServletFileUpload.isMultipartContent(request);
@@ -306,14 +180,25 @@ public class PhotoMgtController {
                     } else if (fileItem.getFieldName().equals("multiFile")) {
                         tempFileItem = fileItem;
                     }
+
+                    LOGGER.info("fileItem==" + fileItem);
                 }
+
 
                 // session中的参数设置获取是我自己的原因,文件名你们可以直接使用fileName,这个是原来的文件名
                 String fileSysName = String.valueOf(System.currentTimeMillis());
                 LOGGER.info("=====================>" + fileName);
 
                 String realname = fileSysName + fileName.substring(fileName.lastIndexOf("."));// 转化后的文件名
-                String filePath = "D:\\dev\\apache-tomcat-7.0.67\\upload\\image\\webuploader\\photo\\";// 文件上传路径
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+                String dateFormatStr = sdf.format(new Date());
+
+                String filePath = "D:\\dev\\apache-tomcat-7.0.67\\upload\\image\\webuploader\\photo\\" + dateFormatStr + "\\";// 文件上传路径
+                if (EnvUtil.isProdEnv()) {
+                    filePath = "/app/data/static/webuploader";
+                }
+
                 // 临时目录用来存放所有分片文件
                 String tempFileDir = filePath + id;
                 File parentFileDir = new File(tempFileDir);
@@ -346,7 +231,16 @@ public class PhotoMgtController {
                     }
                     // 删除临时目录中的分片文件
                     FileUtils.deleteDirectory(parentFileDir);
-                    LOGGER.error("===============>done");
+                    LOGGER.info("===============>done");
+
+                    List<Photo> photoList = (List<Photo>) request.getSession().getAttribute(ApplicationConstant.SESSION_PHOTO_UPLOAD_LIST);
+
+                    Photo photo = new Photo();
+                    photo.setFilePath(destTempFile.getPath());
+
+                    photo.setUrlPath(EnvUtil.getUrl() + "webuploader/" + dateFormatStr + destTempFile.getName());
+                    photoList.add(photo);
+
                 } else {
                     // 临时文件创建失败
                     if (chunk == chunks - 1) {
@@ -359,4 +253,5 @@ public class PhotoMgtController {
             LOGGER.error(e.getMessage(), e);
         }
     }
+
 }
