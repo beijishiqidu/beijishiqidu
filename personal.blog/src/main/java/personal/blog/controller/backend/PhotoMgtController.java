@@ -37,6 +37,7 @@ import personal.blog.service.PhotoService;
 import personal.blog.util.EnvUtil;
 import personal.blog.util.PageSplitUtil;
 import personal.blog.vo.Photo;
+import personal.blog.vo.PhotoAlbum;
 
 import com.google.gson.Gson;
 
@@ -69,7 +70,7 @@ public class PhotoMgtController {
     @RequestMapping(value = "/manage/list", method = RequestMethod.GET)
     public ModelAndView forwardPhotoListPage() {
         ModelAndView mav = new ModelAndView("admin/photo_list");
-        List<TypeCount> psu = photoService.getPhotoTypeCount();
+        List<TypeCount> psu = photoService.getPhotoAlbumCount();
         mav.addObject("typeList", psu);
         return mav;
     }
@@ -79,12 +80,44 @@ public class PhotoMgtController {
         ModelAndView mav = new ModelAndView("admin/photo_detail");
         PageSplitUtil<Photo> psu = photoService.getPhotoListForPage(0, 999, albumId);
         mav.addObject("pagination", psu);
+
+        List<PhotoAlbum> albumList = photoService.getPhotoAlbumList();
+        for (PhotoAlbum pa : albumList) {
+            if (pa.getId().toString().equals(albumId)) {
+                mav.addObject("photoAlbum", pa);
+            }
+        }
+        return mav;
+    }
+
+    @SuppressWarnings("unchecked")
+    @RequestMapping(value = "/manage/edit", method = RequestMethod.GET)
+    public ModelAndView forwardPhotoImageEditPage(HttpServletRequest request, String albumId) {
+        ModelAndView mav = new ModelAndView("admin/photo_edit");
+        PageSplitUtil<Photo> psu = photoService.getPhotoListForPage(0, 999, albumId);
+        mav.addObject("pagination", psu);
+
+        List<PhotoAlbum> albumList = photoService.getPhotoAlbumList();
+        for (PhotoAlbum pa : albumList) {
+            if (pa.getId().toString().equals(albumId)) {
+                mav.addObject("photoAlbum", pa);
+            }
+        }
+
+        HttpSession session = request.getSession();
+        if (null == session.getAttribute(ApplicationConstant.SESSION_PHOTO_UPLOAD_LIST)) {
+            session.setAttribute(ApplicationConstant.SESSION_PHOTO_UPLOAD_LIST, new ArrayList<Photo>());
+        } else {
+            List<Photo> list = (List<Photo>) session.getAttribute(ApplicationConstant.SESSION_PHOTO_UPLOAD_LIST);
+            list.clear();
+        }
+
         return mav;
     }
 
     @SuppressWarnings("unchecked")
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public ModelAndView savePhotoInfo(String photoId, String title, String type, HttpServletRequest request) {
+    public ModelAndView savePhotoInfo(String photoAlbumId, String title, String type, HttpServletRequest request) {
 
         List<Photo> list = (List<Photo>) request.getSession().getAttribute(ApplicationConstant.SESSION_PHOTO_UPLOAD_LIST);
 
@@ -102,7 +135,7 @@ public class PhotoMgtController {
         } else {
             try {
 
-                Long id = photoService.savePhotoInfo(photoId, title, type, list);
+                Long id = photoService.savePhotoInfo(photoAlbumId, title, type, list);
                 returnMap.put("result", true);
                 returnMap.put("msg", "保存成功");
                 returnMap.put("photoId", id);
@@ -125,13 +158,33 @@ public class PhotoMgtController {
     }
 
     @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    public ModelAndView deletePhoto(Long photoId, Integer firstResult, Integer maxResults) {
-        photoService.deletePhotoById(photoId);
-        ModelAndView mav = new ModelAndView("admin/ajax_photo_list");
-        PageSplitUtil<Photo> psu = photoService.getPhotoListForPage(firstResult, maxResults, StringUtils.EMPTY);
-        mav.addObject("pagination", psu);
-        return mav;
+    @ResponseBody
+    public String deletePhoto(String photoId) {
+
+        Map<String, Object> returnMap = new HashMap<String, Object>();
+        try {
+
+            boolean result = photoService.deletePhotoById(photoId);
+            returnMap.put("result", result);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+            returnMap.put("result", false);
+            returnMap.put("msg", e.getMessage());
+        }
+        Gson gson = new Gson();
+        String result = gson.toJson(returnMap);
+        return result;
     }
+
+    // @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    // public ModelAndView deletePhoto(Long photoId, Integer firstResult, Integer maxResults) {
+    // photoService.deletePhotoById(photoId);
+    // ModelAndView mav = new ModelAndView("admin/ajax_photo_list");
+    // PageSplitUtil<Photo> psu = photoService.getPhotoListForPage(firstResult, maxResults,
+    // StringUtils.EMPTY);
+    // mav.addObject("pagination", psu);
+    // return mav;
+    // }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public ModelAndView forwardEditPhotoPage(Long photoId) {
@@ -238,7 +291,7 @@ public class PhotoMgtController {
                     Photo photo = new Photo();
                     photo.setFilePath(destTempFile.getPath());
 
-                    photo.setUrlPath(EnvUtil.getUrl() + "webuploader/" + dateFormatStr + destTempFile.getName());
+                    photo.setUrlPath(EnvUtil.getUrl() + "webuploader/photo/" + dateFormatStr + "/" + destTempFile.getName());
                     photoList.add(photo);
 
                 } else {

@@ -17,7 +17,7 @@ body{
 .button{
     text-align: center;
     margin-top: 20px;
-    padding-bottom: 20px;
+    cursor: pointer;
 }
 .button div{
     display: inline-block;

@@ -14,6 +14,10 @@
 
 <%@include file="../common_style.jsp"%>
 <%@include file="../common_javascript.jsp"%>
+
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body class="admin-home-body">
     <div class="home">
@@ -25,23 +29,22 @@
                     <div class="main-content-wrapper"
                         id="main-content-wrapper">
                         <form id="articleTypeAddForm" method="post"
-                            enctype="multipart/form-data"
                             target="hideframe"
-                            action="<c:url value="/admin/type/save/article"/>">
+                            action="<c:url value="/admin/type/add/save-article-type"/>">
                             <input name="typeId" id="typeId"
                                 value="${typeObj.id}" type="hidden" />
                             <div class="title-container">
-                                <label>类型名称:</label><input name="title"
+                                <label>类型名称:</label><input name="typeName"
                                     class="title" type="text"
                                     value="${typeObj.typeName}" /> <span
                                     data-name="typeName" class="error-tips"></span>
                             </div>
                             <span data-name="content" class="error-tips"></span>
+                            <div id="resultMsg" class=""></div>
                             <div class="button-area">
                                 <button class="button" type="button"
                                     onclick="App.submitArticleTypeInfo();">保存</button>
-                                <div class="clear-float"></div>
-                                <div id="resultMsg" class=""></div>
+                                <div class="cl"></div>
                             </div>
                         </form>
                         <iframe name="hideframe" id="hideframe"

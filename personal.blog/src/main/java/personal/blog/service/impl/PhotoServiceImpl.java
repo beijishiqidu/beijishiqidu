@@ -1,5 +1,6 @@
 package personal.blog.service.impl;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.apache.tools.ant.util.FileUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -37,19 +39,17 @@ public class PhotoServiceImpl implements PhotoService {
     private GenericDao genericDao;
 
     @Override
-    public PageSplitUtil<Photo> getPhotoListForPage(Integer firstResult, Integer maxResults, String typeId) {
+    public PageSplitUtil<Photo> getPhotoListForPage(Integer firstResult, Integer maxResults, String albumId) {
 
-        LOGGER.info("Query param typeId=" + typeId);
+        LOGGER.info("Query param typeId=" + albumId);
 
         firstResult = firstResult == null ? 0 : firstResult;
         maxResults = maxResults == null ? 6 : maxResults;
 
         DetachedCriteria dc = DetachedCriteria.forClass(Photo.class);
 
-        if (StringUtils.isNotEmpty(typeId)) {
-            PhotoType type = genericDao.getObject(PhotoType.class, typeId);
-            dc.createAlias("album", "album");
-            dc.add(Restrictions.eq("album.type", type));
+        if (StringUtils.isNotEmpty(albumId)) {
+            dc.add(Restrictions.eq("album.id", Long.valueOf(albumId)));
         }
         Long totalCount = genericDao.findCountByCriteria(dc);
 
@@ -75,7 +75,24 @@ public class PhotoServiceImpl implements PhotoService {
     }
 
     @Override
-    // @Cacheable(value = "org.hibernate.cache.internal.StandardQueryCache")
+    @Cacheable(value = "org.hibernate.cache.internal.StandardQueryCache")
+    public List<PhotoAlbum> getPhotoAlbumList() {
+        return genericDao.listWithCache(PhotoAlbum.class);
+    }
+
+    @Override
+    @Cacheable(value = "org.hibernate.cache.internal.StandardQueryCache",key="'getPhotoAlbumCount'")
+    public List<TypeCount> getPhotoAlbumCount() {
+        List<TypeCount> list =
+                genericDao
+                        .getEntityObjectListByFullSql(
+                                "select a.album typeId,count(a.id) as typeCount, ab.title as typeName from tbl_photo a, tbl_photo_album ab where a.album=ab.id group by a.album",
+                                TypeCount.class);
+        return list;
+    }
+    
+    @Override
+    @Cacheable(value = "org.hibernate.cache.internal.StandardQueryCache",key="'getPhotoTypeCount'")
     public List<TypeCount> getPhotoTypeCount() {
         List<TypeCount> list =
                 genericDao.getEntityObjectListByFullSql(
@@ -115,29 +132,25 @@ public class PhotoServiceImpl implements PhotoService {
 
     @Override
     @Transactional(rollbackFor = DataAccessException.class, propagation = Propagation.REQUIRED)
-    public Long savePhotoInfo(String photoId, String title, String type, List<Photo> list) {
+    public Long savePhotoInfo(String photoAlbumId, String title, String type, List<Photo> list) {
 
         PhotoAlbum pa = null;
 
         PhotoType pt = genericDao.getObject(PhotoType.class, type);
-        if (StringUtils.isEmpty(photoId)) {
+        if (StringUtils.isEmpty(photoAlbumId)) {
             pa = new PhotoAlbum();
             pa.setScanTimes(0L);
             pa.setCreateDate(Calendar.getInstance());
             pa.setType(pt);
             pa.setTitle(title);
         } else {
-            pa = genericDao.getObject(PhotoAlbum.class, photoId);
+            pa = genericDao.getObject(PhotoAlbum.class, photoAlbumId);
             pa.setTitle(title);
             pa.setType(pt);
             pa.setUpdateDate(Calendar.getInstance());
         }
 
         genericDao.saveOrUpdateObject(pa);
-
-        // DetachedCriteria dc = DetachedCriteria.forClass(Photo.class);
-        // dc.add(Restrictions.eq("album", pa));
-        // List<Photo> photoList = genericDao.findRowsByCriteria(dc, 0, 999);
 
         boolean first = false;
         for (Photo photo : list) {
@@ -156,6 +169,26 @@ public class PhotoServiceImpl implements PhotoService {
         }
 
         return pa.getId();
+    }
+
+    @Override
+    @Transactional(rollbackFor = DataAccessException.class, propagation = Propagation.REQUIRED)
+    public boolean deletePhotoById(String photoId) {
+
+        boolean result = false;
+        Photo photo = genericDao.getObject(Photo.class, photoId);
+
+        try {
+            FileUtils.delete(new File(photo.getFilePath()));
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+            return result;
+        }
+
+        genericDao.deleteObject(photo);
+        result = true;
+        
+        return result;
     }
 
     @Override

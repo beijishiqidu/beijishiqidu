@@ -33,6 +33,7 @@
     height: 300px;
     overflow: hidden;
     border: 1px solid #999;
+    margin-bottom: 20px;
 }
 
 .bg-photo-detail-container .zoom-image {
@@ -74,22 +75,19 @@
                     <div class="main-content-wrapper"
                         id="main-content-wrapper">
                         <div class="photo-detail-info-list">
-                            <h3>相册详细</h3>
+                            <h1>相册详细</h1>
+                            
+                            <div class="page-header">
+                              <h4 style="float: left;">相册名称：</h4><h4 style="float: left;">${photoAlbum.title}</h4><div class="cl"></div>
+                              <h4 style="float: left;">相册类型：</h4><h4 style="float: left;">${photoAlbum.type.typeName}</h4><div class="cl"></div>
+                            </div>
+                            
                             <div class="bg-photo-detail-container">
                                 <c:forEach items="${pagination.items}"
                                     var="list" varStatus="status">
                                     <div class="item">
-                                        <div class="delete-layer">
-                                            <div class="btn-group">
-                                                <button type="button" class="btn btn-default">查看</button>
-                                                <button type="button" class="btn btn-default">删除</button>
-                                            </div>
-                                        </div>
                                         <div class="zoom-image" style="background-image:url(${list.urlPath})"></div>
                                     </div>
-                                    <c:if test="${status.count%3==0}">
-                                        <div class="vertial-line cl"></div>
-                                    </c:if>
                                 </c:forEach>
                                 <div class="cl"></div>
                             </div>

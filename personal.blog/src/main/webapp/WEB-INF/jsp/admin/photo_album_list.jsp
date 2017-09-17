@@ -60,10 +60,9 @@
                                                     <span>${list.typeCount }</span>
                                                 </div></td>
                                             <td><a
-                                                href="javascript:Event.forwardBackendPhotoDetailPage(${list.typeId})">详细</a>&nbsp;
+                                                href="javascript:Event.forwardBackendPhotoTypeEditPage(${list.typeId})">编辑(待实现)</a>&nbsp;
                                                 <a
-                                                href="javascript:Event.forwardBackendPhotoEditPage(${list.typeId})">编辑</a>
-                                            </td>
+                                                href="javascript:App.deletePhotoTypeById(${list.typeId})">删除(待实现)</a></td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>

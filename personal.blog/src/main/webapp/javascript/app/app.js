@@ -76,13 +76,11 @@ var App = (function() {
 
 	var submitArticleTypeInfoCallback = function(data) {
 		var data = jQuery.parseJSON(data);
-		$('#typeId').val(data.articleTypeId);
+		$('#typeId').val(data.typeId);
 		if (data.result == false) {
-			if (data.dbSave == true) {
-				$('#resultMsg').html('<div class="error">' + data.msg + '</div>');
-			}
+			$('#resultMsg').html('<div class="alert alert-danger" role="alert">'+data.msg+'</div>');
 		} else {
-			$('#resultMsg').html('<div class="success">' + data.msg + '</div>');
+			$('#resultMsg').html('<div class="alert alert-success" role="alert">' + data.msg + '</div>');
 		}
 		$('form button').removeAttr('disabled');
 	};
@@ -118,6 +116,20 @@ var App = (function() {
 			//setTimeout("top.location.href='" + App.getUrlPath()+ "/admin/newsList.html" + "'", 1000);
 		}
 		$('form button').removeAttr('disabled');
+	};
+	
+	var deleteCurrentPhoto = function(thisObj, photoId){
+		$.post(urlPath + '/admin/photo/delete', {
+			photoId : photoId
+		}, function(data) {
+			var data = jQuery.parseJSON(data);
+			if (data.result == true) {
+				$(thisObj).parents('.item').remove();
+			}else{
+				alert(data.msg);
+			}
+		});
+		
 	};
 	
 
@@ -911,6 +923,7 @@ var App = (function() {
 		submitArticleTypeInfoCallback : submitArticleTypeInfoCallback,
 		submitPhotoInfo : submitPhotoInfo,
 		submitPhotoInfoCallback : submitPhotoInfoCallback,
+		deleteCurrentPhoto: deleteCurrentPhoto,
 		
 		InitProvinceList : InitProvinceList,
 		submitCustomerInfo : submitCustomerInfo,

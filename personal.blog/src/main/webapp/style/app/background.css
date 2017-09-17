@@ -148,6 +148,7 @@ input[placeholder]{
 
 .main-content .success{
     color: green;
+    font-size: 12px;
 }
 
 .main-content .title-container{

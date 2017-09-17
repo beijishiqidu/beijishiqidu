@@ -8,6 +8,7 @@ import personal.blog.form.FormAlert;
 import personal.blog.util.PageSplitUtil;
 import personal.blog.vo.Article;
 import personal.blog.vo.ArticleType;
+import personal.blog.vo.ExecResult;
 
 public interface ArticleService {
 
@@ -27,6 +28,6 @@ public interface ArticleService {
 
     List<TypeCount> getArticleTypeCount();
 
-    Long saveArticleTypeInfo(String typeId, String typeName);
+    ExecResult saveArticleTypeInfo(String typeId, String typeName);
 
 }

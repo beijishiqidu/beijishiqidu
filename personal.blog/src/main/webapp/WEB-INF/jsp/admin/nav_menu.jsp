@@ -16,9 +16,9 @@
 				<li><a href="#">分类管理</a>
 					<ul>
                         <li><span onclick="Event.openInCurrentTab('/admin/type/list/article');">文章分类列表</span></li>
-                        <li><span onclick="Event.openInCurrentTab('/admin/type/list/photo');">相册分类列表</span></li>
-                        <li><span onclick="Event.openInCurrentTab('/admin/type/add/article');">增加文章分类(待实现)</span></li>
-                        <li><span onclick="Event.openInCurrentTab('/admin/type/add/photo');">增加相册分类(待实现)</span></li>
+                        <li><span onclick="Event.openInCurrentTab('/admin/type/list/photo-type');">相册分类列表</span></li>
+                        <li><span onclick="Event.openInCurrentTab('/admin/type/add/article-type');">增加文章类型</span></li>
+                        <li><span onclick="Event.openInCurrentTab('/admin/type/add/photo-type');">增加相册类型(待实现)</span></li>
 					</ul></li>
 				<li><a href="#">相册管理</a>
 					<ul>

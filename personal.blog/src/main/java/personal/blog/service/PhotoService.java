@@ -7,6 +7,7 @@ import personal.blog.form.FormAlert;
 import personal.blog.form.PhotoForm;
 import personal.blog.util.PageSplitUtil;
 import personal.blog.vo.Photo;
+import personal.blog.vo.PhotoAlbum;
 import personal.blog.vo.PhotoType;
 
 public interface PhotoService {
@@ -26,6 +27,12 @@ public interface PhotoService {
     Photo getPhotoById(Long photoId);
 
     List<Photo> getPhotoAlnumFaceList(String photoTypeId);
+
+    List<PhotoAlbum> getPhotoAlbumList();
+
+    boolean deletePhotoById(String photoId);
+
+    List<TypeCount> getPhotoAlbumCount();
 
 
 }

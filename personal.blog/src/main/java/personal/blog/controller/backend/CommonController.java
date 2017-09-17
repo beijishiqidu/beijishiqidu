@@ -22,6 +22,9 @@ import personal.blog.service.ArticleService;
 import personal.blog.service.CommonService;
 import personal.blog.service.LoginService;
 import personal.blog.service.PhotoService;
+import personal.blog.vo.ExecResult;
+
+import com.google.gson.Gson;
 
 @Controller
 public class CommonController {
@@ -91,6 +94,14 @@ public class CommonController {
     }
 
     @RequestMapping(value = "/admin/type/list/photo", method = RequestMethod.GET)
+    public ModelAndView forwardPhotoAlbumListPage() {
+        ModelAndView mav = new ModelAndView("admin/photo_album_list");
+        List<TypeCount> psu = photoService.getPhotoAlbumCount();
+        mav.addObject("typeList", psu);
+        return mav;
+    }
+
+    @RequestMapping(value = "/admin/type/list/photo-type", method = RequestMethod.GET)
     public ModelAndView forwardPhotoTypeListPage() {
         ModelAndView mav = new ModelAndView("admin/photo_type_list");
         List<TypeCount> psu = photoService.getPhotoTypeCount();
@@ -98,13 +109,44 @@ public class CommonController {
         return mav;
     }
 
-    @RequestMapping(value = "/admin/type/add/article", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/type/add/article-type", method = RequestMethod.GET)
     public ModelAndView forwardAddArticleTypePage(String typeId, String typeName, HttpServletRequest request) {
+        ModelAndView mav = new ModelAndView("admin/article_type_add");
+        return mav;
+    }
+
+    @RequestMapping(value = "/admin/type/add/save-article-type", method = RequestMethod.POST)
+    public ModelAndView saveArticleType(String typeId, String typeName, HttpServletRequest request) {
+
+        Map<String, Object> returnMap = new HashMap<String, Object>();
+        try {
+            ExecResult er = articleService.saveArticleTypeInfo(typeId, typeName);
+            returnMap.put("result", er.isResult());
+            returnMap.put("msg", er.getMessage());
+            returnMap.put("typeId", er.getAppend().get("id"));
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+            returnMap.put("result", false);
+            returnMap.put("msg", "保存失败");
+        }
+        Gson gson = new Gson();
+        String result = gson.toJson(returnMap);
+
+        request.setAttribute("callback", "App.submitArticleTypeInfoCallback");
+        request.setAttribute("returnValue", result);
+
+        ModelAndView mav = new ModelAndView("upload");
+        
+        return mav;
+    }
+
+    @RequestMapping(value = "/admin/type/add/photo-album", method = RequestMethod.GET)
+    public ModelAndView forwardAddPhotoAlbumPage(String typeId, String typeName, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("upload");
         return mav;
     }
 
-    @RequestMapping(value = "/admin/type/add/photo", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/type/add/photo-type", method = RequestMethod.GET)
     public ModelAndView forwardAddPhotoTypePage(String typeId, String typeName, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("upload");
         return mav;

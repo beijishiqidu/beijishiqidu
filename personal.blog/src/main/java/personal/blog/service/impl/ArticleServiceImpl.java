@@ -25,6 +25,7 @@ import personal.blog.util.HtmlFilterUtil;
 import personal.blog.util.PageSplitUtil;
 import personal.blog.vo.Article;
 import personal.blog.vo.ArticleType;
+import personal.blog.vo.ExecResult;
 
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -124,13 +125,13 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    @Cacheable(value = "org.hibernate.cache.internal.StandardQueryCache")
+    @Cacheable(value = "org.hibernate.cache.internal.StandardQueryCache", key = "'getArticleTypeList'")
     public List<ArticleType> getArticleTypeList() {
         return genericDao.listWithCache(ArticleType.class);
     }
 
     @Override
-    // @Cacheable(value = "org.hibernate.cache.internal.StandardQueryCache")
+    @Cacheable(value = "org.hibernate.cache.internal.StandardQueryCache" ,key="'getArticleTypeCount'")
     public List<TypeCount> getArticleTypeCount() {
         List<TypeCount> list =
                 genericDao.getEntityObjectListByFullSql("select a.type typeId,count(a.id) as typeCount from tbl_article a group by a.type",
@@ -158,7 +159,23 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Long saveArticleTypeInfo(String typeId, String typeName) {
+    @Transactional(rollbackFor = DataAccessException.class, propagation = Propagation.REQUIRED)
+    public ExecResult saveArticleTypeInfo(String typeId, String typeName) {
+        
+        ExecResult er = new ExecResult();
+        if (StringUtils.isEmpty(typeName)) {
+            er.setMessage("文章类型不能为空");
+            return er;
+        }
+
+        List<ArticleType> list = getArticleTypeList();
+        for (ArticleType at : list) {
+            if (at.getTypeName().equals(typeName)) {
+                er.setMessage("该类型名称已经存在");
+                return er;
+            }
+        }
+
         ArticleType articleType = null;
         if (StringUtils.isEmpty(typeId)) {
             articleType = new ArticleType();
@@ -167,6 +184,11 @@ public class ArticleServiceImpl implements ArticleService {
         }
         articleType.setTypeName(typeName);
         genericDao.saveOrUpdateObject(articleType);
-        return articleType.getId();
+        
+        er.setResult(true);
+        er.setMessage("类型保存成功");
+        er.getAppend().put("id", articleType.getId());
+        
+        return er;
     }
 }

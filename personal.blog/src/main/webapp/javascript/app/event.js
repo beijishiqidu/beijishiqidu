@@ -19,6 +19,10 @@ var Event = (function() {
     	location.href = App.getUrlPath() + '/admin/photo/manage/detail/' + typeId;
     }
     
+    var forwardBackendPhotoEditPage = function(typeId) {
+    	location.href = App.getUrlPath() + '/admin/photo/manage/edit/' + typeId;
+    }
+    
     /************************************************************************************************************/
 
     var forwardAboutUsPage = function() {
@@ -213,6 +217,7 @@ var Event = (function() {
         forwardDecorateKnowledgeDetailPageInNewPage: forwardDecorateKnowledgeDetailPageInNewPage,
         forwardBackendArticleEditPage: forwardBackendArticleEditPage,
         forwardBackendPhotoDetailPage: forwardBackendPhotoDetailPage,
+        forwardBackendPhotoEditPage: forwardBackendPhotoEditPage,
         forwardBackendDecorateDiaryEditPage: forwardBackendDecorateDiaryEditPage,
         forwardBackendDecorateKnowledgeEditPage: forwardBackendDecorateKnowledgeEditPage,
         forwardBackendEditDesignCase: forwardBackendEditDesignCase,
