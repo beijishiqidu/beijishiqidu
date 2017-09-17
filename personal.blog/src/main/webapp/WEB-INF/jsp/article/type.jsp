@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <head>
 <%@include file="../common_meta_link.jsp"%>
 <%@include file="../common_style.jsp"%>
@@ -26,6 +27,11 @@
                 </div>
             </div>
             <div class="right-area">
+                <c:if test="${pagination.items== null || fn:length(pagination.items) == 0}">
+                    <div class="no-content">
+                        <p>还没有内容...</p>
+                    </div>
+                </c:if>
                 <c:forEach items="${pagination.items}" var="item">
                     <div class="article-item">
                         <p class="title"><a href="${path}/article/detail/${item.id}">${item.title}</a></p>

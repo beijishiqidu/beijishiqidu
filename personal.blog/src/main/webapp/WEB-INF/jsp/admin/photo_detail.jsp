@@ -13,19 +13,57 @@
     scope="page" />
 
 <style>
-.photo-detail-info-list img {
-    width: 100%;
-    height: 100%;
+.main-content{
+    padding-bottom: 100px;
 }
 
-.photo-detail-info-list .item{
-    margin-bottom: 30px;
+.photo-detail-info-list{
+    width: 1200px;
+    overflow:hidden;
+}
+
+.bg-photo-detail-container{
+    width: 1215px;
+}
+
+.bg-photo-detail-container .item{
+    float: left;
+    margin-right: 15px;
+    width: 390px;
+    height: 300px;
+    overflow: hidden;
+    border: 1px solid #999;
+}
+
+.bg-photo-detail-container .zoom-image {
+    width:100%;
+    height:0;
+    padding-bottom: 100%;
+    overflow:hidden;
+    background-position: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size:cover;
+    -moz-background-size:cover;
+    background-size:cover;
+}
+
+.bg-photo-detail-container .delete-layer{
+    border-bottom: 1px solid #666;
+    padding: 1px 0 1px 1px;
+}
+
+.bg-photo-detail-container .vertial-line{
+    height: 15px;
 }
 
 </style>
 
 <%@include file="../common_style.jsp"%>
 <%@include file="../common_javascript.jsp"%>
+
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body class="admin-home-body">
     <div class="home">
@@ -37,12 +75,24 @@
                         id="main-content-wrapper">
                         <div class="photo-detail-info-list">
                             <h3>相册详细</h3>
-                            <c:forEach items="${pagination.items}"
-                                var="list">
-                                <div class="item">
-                                    <img src="${list.urlPath}" />
-                                </div>
-                            </c:forEach>
+                            <div class="bg-photo-detail-container">
+                                <c:forEach items="${pagination.items}"
+                                    var="list" varStatus="status">
+                                    <div class="item">
+                                        <div class="delete-layer">
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-default">查看</button>
+                                                <button type="button" class="btn btn-default">删除</button>
+                                            </div>
+                                        </div>
+                                        <div class="zoom-image" style="background-image:url(${list.urlPath})"></div>
+                                    </div>
+                                    <c:if test="${status.count%3==0}">
+                                        <div class="vertial-line cl"></div>
+                                    </c:if>
+                                </c:forEach>
+                                <div class="cl"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -50,5 +100,12 @@
         </div>
     </div>
 </body>
+
+<script type="text/javascript">
+    $(function(){
+        
+    });
+</script>
+
 </html>
 

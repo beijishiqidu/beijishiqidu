@@ -25,5 +25,7 @@ public interface PhotoService {
 
     Photo getPhotoById(Long photoId);
 
+    List<Photo> getPhotoAlnumFaceList(String photoTypeId);
+
 
 }

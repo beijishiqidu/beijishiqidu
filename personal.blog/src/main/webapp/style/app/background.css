@@ -130,7 +130,7 @@ input[placeholder]{
 .main-content .button-area{
 	height: 100px;
 }
-.main-content button{
+.main-content .button{
 	display: inline-block;
 	width:60px;
 	height: 30px;

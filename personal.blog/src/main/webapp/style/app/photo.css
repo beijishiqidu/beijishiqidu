@@ -48,7 +48,7 @@
 }
 
 .p-right-area .line-item .rr{
-    widows: 350px;
+    width: 350px;
     background-color: white;
     float: right;
     position: relative;
@@ -100,20 +100,28 @@
     margin-top: 180px;
 }
 
+.p-right-area .line-item .img-p{
+    height: 224px;
+    width: 330px;
+    overflow: hidden;
+    margin: 10px;
+}
+
 .p-right-area .line-item img{
-    padding: 8px;
-    
+    width:100%; 
+    max-width:100%; 
+    overflow: hidden;
 }
 
 .p-right-area .line-item .opacity-lay{
     background-color: black;
     opacity: 0.5;
     height: 224px;
-    width: 334px;
+    width: 330px;
     position: absolute;
     display: none;
-    left: 8px;
-    top: 8px;
+    left: 10px;
+    top: 10px;
     cursor: pointer;
 }
 
@@ -122,3 +130,4 @@
     color: white;
     font-weight: bold;
 }
+

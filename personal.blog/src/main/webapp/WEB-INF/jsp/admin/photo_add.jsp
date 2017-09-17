@@ -76,7 +76,7 @@
                             
                             <span data-name="content" class="error-tips"></span>
                             <div class="button-area">
-                                <button type="button"
+                                <button class="button" type="button"
                                     onclick="App.submitPhotoInfo();">保存</button>
                                 <div class="clear-float"></div>
                                 <div id="resultMsg" class=""></div>

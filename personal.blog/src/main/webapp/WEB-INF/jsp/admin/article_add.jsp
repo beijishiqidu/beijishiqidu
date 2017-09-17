@@ -24,8 +24,8 @@
                     <h3>添加文章</h3>
                     <div class="main-content-wrapper"
                         id="main-content-wrapper">
+                        <!-- enctype="multipart/form-data" -->
                         <form id="articleAddForm" method="post"
-                            enctype="multipart/form-data"
                             target="hideframe"
                             action="<c:url value="/admin/article/save"/>">
                             <input name="articleId" id="articleId"
@@ -51,7 +51,7 @@
                             <script id="container" name="content" type="text/plain"></script>
                             <span data-name="content" class="error-tips"></span>
                             <div class="button-area">
-                                <button type="button"
+                                <button class="button" type="button"
                                     onclick="App.submitArticleInfo();">保存</button>
                                 <div class="clear-float"></div>
                                 <div id="resultMsg" class=""></div>

@@ -1,6 +1,7 @@
 package personal.blog.controller.frontend;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ import personal.blog.service.ArticleService;
 import personal.blog.service.PhotoService;
 import personal.blog.util.PageSplitUtil;
 import personal.blog.vo.Article;
+import personal.blog.vo.Photo;
 
 @Controller
 public class FrontPageController {
@@ -91,6 +93,11 @@ public class FrontPageController {
         // 暂时从数据库中查询文章的分类
         mav.addObject("photoTypeCount", photoService.getPhotoTypeCount());
 
+        // 获取每个相册分类下得相册  
+        List<Photo> photoList = photoService.getPhotoAlnumFaceList(id);
+        mav.addObject("photoList", photoList);
+        mav.addObject("listSize", photoList.size());
+        
         return mav;
     }
 

@@ -139,11 +139,18 @@ public class PhotoServiceImpl implements PhotoService {
         // dc.add(Restrictions.eq("album", pa));
         // List<Photo> photoList = genericDao.findRowsByCriteria(dc, 0, 999);
 
+        boolean first = false;
         for (Photo photo : list) {
             photo.setCreateDate(Calendar.getInstance());
             photo.setUpdateDate(Calendar.getInstance());
             photo.setAlbum(pa);
             photo.setScanTimes(0L);
+
+            if (!first) {
+                photo.setFace(true);
+                first = true;
+            }
+
             genericDao.saveObject(photo);
             LOGGER.info("photo===>" + photo.getFilePath() + "==>" + photo.getUrlPath());
         }
@@ -151,6 +158,25 @@ public class PhotoServiceImpl implements PhotoService {
         return pa.getId();
     }
 
+    @Override
+    public List<Photo> getPhotoAlnumFaceList(String photoTypeId) {
+
+        DetachedCriteria dc = DetachedCriteria.forClass(Photo.class);
+
+        if (StringUtils.isNotEmpty(photoTypeId)) {
+            PhotoType type = genericDao.getObject(PhotoType.class, photoTypeId);
+            dc.createAlias("album", "album");
+            dc.add(Restrictions.eq("album.type", type));
+        }
+
+        dc.add(Restrictions.eq("face", true));
+
+        dc.addOrder(Order.desc("createDate"));
+        // 给定一个默认的1000条.
+        List<Photo> list = genericDao.findRowsByCriteria(dc, 0, 1000);
+
+        return list;
+    }
 
     @Override
     public void deletePhotoById(Long photoId) {

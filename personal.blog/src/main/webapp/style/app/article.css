@@ -9,7 +9,7 @@
     background-color: white;
     border-top: 2px solid green;
     margin-bottom: 20px;
-    color: #999;
+    /* color: #999; */
 }
 
 .detail-content-container .article-item .title{
@@ -27,4 +27,14 @@
 .detail-content-container .article-content{
     line-height: 35px;
     margin: 10px 20px 10px 20px;
+}
+
+.no-content{
+    min-height: 400px;
+    background-color: white;
+}
+
+.no-content p{
+    margin-left: 20px;
+    padding-top: 20px;
 }

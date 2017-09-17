@@ -37,6 +37,9 @@ public class Photo {
 
     @Column(name = "scan_times")
     private Long scanTimes;
+    
+    @Column(name="face")
+    private Boolean face;
 
     public Long getId() {
         return id;
@@ -92,5 +95,13 @@ public class Photo {
 
     public void setAlbum(PhotoAlbum album) {
         this.album = album;
+    }
+
+    public Boolean getFace() {
+        return face;
+    }
+
+    public void setFace(Boolean face) {
+        this.face = face;
     }
 }

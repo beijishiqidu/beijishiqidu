@@ -119,6 +119,7 @@ var App = (function() {
 		}
 		$('form button').removeAttr('disabled');
 	};
+	
 
 	/** ***************************************************************************************************************** */
 	var InitProvinceList = function() {
