@@ -55,5 +55,7 @@ public interface GenericDao {
 
     <T> List<T> getEntityObjectListByFullSql(String fullSql, Class<T> clzz);
 
+    <T> void deleteObject(Class<T> cls, String id);
+
 
 }

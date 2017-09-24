@@ -134,7 +134,8 @@ span.error-tips {
 }
 
 form.pagination {
-    margin: 10px auto;
+    margin: 0px auto;
+    padding-top: 10px;
 }
 
 form.pagination .button {
@@ -149,6 +150,8 @@ form.pagination .button {
     cursor: pointer;
     width: 30px;
     margin-left: 4px;
+    float: left;
+    margin-bottom: 15px;
 }
 
 form.pagination .button:hover {

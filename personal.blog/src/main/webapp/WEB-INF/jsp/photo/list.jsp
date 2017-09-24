@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <head>
 <%@include file="../common_meta_link.jsp"%>
 <%@include file="../common_style.jsp"%>
@@ -26,7 +27,11 @@
                 </div>
             </div>
             <div class="p-right-area">
-            
+                <c:if test="${photoList== null || fn:length(photoList) == 0}">
+                    <div class="no-content">
+                        <p>还没有内容...</p>
+                    </div>
+                </c:if>
                 <c:forEach items="${photoList}" var="list" step="1" varStatus="status">
                     <c:choose>
                         <c:when test="${status.count<listSize or listSize%2==0}">
@@ -34,7 +39,7 @@
                                 <div class="line-item">
                                     <div class="rl">
                                         <div class="img-p">
-                                            <img src="${list.urlPath}"/>
+                                            <img src="${list.urlPath}" data-album-id="${list.album.id}"/>
                                         </div>
                                         <div class="opacity-lay"><p>${list.album.title}</p></div>
                                     </div>
@@ -54,7 +59,7 @@
                             </c:if>
                             <c:if test="${status.count%2==0}">
                                 <div class="rr">
-                                    <div class="img-p"><img src="${list.urlPath}"/></div>
+                                    <div class="img-p"><img src="${list.urlPath}" data-album-id="${list.album.id}"/></div>
                                     <div class="opacity-lay"><p>${list.album.title}</p>
                                     </div>
                                 </div>
@@ -65,7 +70,7 @@
                         <c:otherwise>
                             <div class="line-item">
                                 <div class="rl">
-                                    <div class="img-p"><img src="${list.urlPath}"/></div>
+                                    <div class="img-p"><img src="${list.urlPath}" data-album-id="${list.album.id}"/></div>
                                     <div class="opacity-lay"><p>${list.album.title}</p></div>
                                 </div>
                                 <div class="rm">
@@ -83,52 +88,6 @@
                         <div class="v-line height-bottom"></div>
                     </c:if>
                 </c:forEach>
-                
-                <%-- 
-            
-            
-                <c:forEach items="${photoList}" var="list" step="1" varStatus="status">
-                    <c:if test="${status.count%2!=0}">
-                        <div class="line-item">
-                        <div class="rl"><img src="${path}/images/p05.png"/><div class="opacity-lay"><p>天空之城，永远美丽</p></div></div>
-                        <div class="rm">
-                            <div class="triangle-right fl"></div>
-                            <div class="navigate-v-line">
-                                <div class="v-line height-bottom"></div>
-                                <p ><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
-                    </c:if>
-                    
-                    <c:if test="${status.count%2!=0} && ${status.count<listSize}">
-                        <div class="v-line height-top"></div>
-                        <p class="bottom"><i class="fa fa-dot-circle-o" aria-hidden="true"></i></p>
-                        <div class="v-line height-middle"></div>
-                    </c:if>
-                    
-                    <c:if test="${status.count%2!=0} && ${status.count<listSize}">
-                        </div>
-                        <div class="triangle-left fr"></div>
-                    </c:if>
-                    
-                    <c:if test="${status.count%2!=0}">
-                        </div>
-                    </c:if>
-                    
-                    <c:if test="${status.count%2==0}">
-                    </div>
-                        <div class="rr"><img src="${path}/images/p06.png"/><div class="opacity-lay"><p>天空之城，永远美丽</p></div></div>
-                    </c:if>
-                            
-                    <c:if test="${status.count%2==0} || ${status.count==listSize}">
-                            <div class="cl"></div>
-                        </div>
-                    </c:if>
-                    
-                    <c:if test="${status.count<=(listSize-2)}">
-                    </div>
-                        <div class="v-line height-bottom"></div>
-                    </c:if>
-                </c:forEach> --%>
-            
             </div>
             <div class="cl"></div>
         </div>
@@ -140,6 +99,10 @@
         $('.p-right-area .line-item .rl, .p-right-area .line-item .rr').each(function(){
             $(this).mouseenter(function(){
             	$(this).find('.opacity-lay').show();
+            	$(this).off('click').on('click', function(){
+                    var albumId = $(this).find('img').data("album-id");
+                    App.openWorkDetailPopupPage(albumId, 0);
+                });
             }).mouseleave(function(){
             	$(this).find('.opacity-lay').hide();
             });

@@ -1,0 +1,44 @@
+#colorbox, #cboxOverlay, #cboxWrapper{position:absolute;top:0;left:0;z-index:19;overflow:hidden;}
+#cboxWrapper{max-width:none;}
+#cboxOverlay{position:fixed;width:100%;height:100%;}
+#cboxOverlay{background:#000; opacity: 0.7; filter: alpha(opacity = 70);}
+#cboxMiddleLeft, #cboxBottomLeft{clear:left;}
+#cboxContent{position:relative;}
+#cboxLoadedContent{overflow:auto;-webkit-overflow-scrolling:touch;}
+#cboxTitle{margin:0;}
+#cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute;top:0;left:0;width:100%;height:100%;}
+#cboxClose{cursor:pointer;}
+.cboxPhoto{float:left;margin:auto;border:0;display:block;max-width:none;-ms-interpolation-mode:bicubic;}
+.cboxIframe{width:100%;height:100%;display:block;border:0;padding:0;margin:0;}
+#colorbox, #cboxContent, #cboxLoadedContent{box-sizing:content-box;-moz-box-sizing:content-box;-webkit-box-sizing:content-box;}
+#colorbox{outline:0;}
+#cboxContent{background:transparent;}
+.cboxIframe{background:#fff;}
+#cboxError{padding:50px;border:1px solid #ccc;}
+#cboxLoadedContent{background:#fff;}
+#cboxTitle{position:absolute;top:-20px;left:0;color:#ccc;}
+#cboxCurrent{position:absolute;top:-20px;right:0px;color:#ccc;}
+#cboxLoadingGraphic{background:url(http://local.beijishiqidu.com/images/ajax-loader.gif) no-repeat center center; background-size:40px 40px;}
+#cboxClose{border:0;padding:0;margin:0;overflow:visible;width:auto;background:none;}
+#cboxClose:active{outline:0;}
+#cboxClose{position:absolute;top:15px;right:5px;display:none;background:url(http://local.beijishiqidu.com/images/cross.png) no-repeat center center;width:38px;height:38px;text-indent:-9999px;outline: none;}
+#cboxClose:hover{background-position:center center;}
+#cboxTopLeft{width:13px;height:13px;opacity:.5;}
+#cboxTopRight{width:13px;height:13px;opacity:.5;}
+#cboxBottomLeft{width:13px;height:13px;opacity:.5;}
+#cboxBottomRight{width:13px;height:13px;opacity:.5;}
+#cboxMiddleLeft{width:13px;opacity:.5;}
+#cboxMiddleRight{width:13px;opacity:.5;}
+#cboxTopCenter{height:13px;opacity:.5;}
+#cboxBottomCenter{height:13px;opacity:.5;}
+#confirmColorbox .header{padding:10px;background:#ededed}
+#confirmColorbox .confirm-content{text-align:center;font-size:18px;padding:0 10px;min-height:160px;line-height:160px}
+#confirmColorbox .confirm-content .success{color:#ff5d2c;font-size:24px;height:180px;line-height:160px;}
+#confirmColorbox .confirm-content .success i.fa{color:#67c620;}
+#confirmColorbox .confirm-content .failure{color:#666666;font-size:24px;height:180px;line-height:160px;}
+#confirmColorbox .confirm-content .failure i.fa{color:#ff5d2c;}
+#confirmColorbox .confirm-btn{text-align:center;padding:0 0 50px}
+#confirmColorbox .confirm-btn button.submit{position:relative;behavior:url(https://local.yunquewo.com/style/pie/PIE.htc);cursor:pointer;border-radius:2px;border:0;padding:0;color:#fff;width:100px;height:40px;background:#ff5d2c;font-size:18px;line-height:38px;margin: 0 20px;}
+#confirmColorbox .confirm-btn button.submit:active{background:#900;color:#fff}
+#confirmColorbox .confirm-btn button.cancel{position:relative;behavior:url(https://local.yunquewo.com/style/pie/PIE.htc);cursor:pointer;border-radius:2px;border:0;padding:0;color:#fff;width:100px;height:40px;background:#999;font-size:18px;line-height:38px;margin: 0 20px;}
+#confirmColorbox .confirm-btn button.cancel:active{background:#333;color:#fff}

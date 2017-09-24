@@ -93,17 +93,41 @@ public class FrontPageController {
         // 暂时从数据库中查询文章的分类
         mav.addObject("photoTypeCount", photoService.getPhotoTypeCount());
 
-        // 获取每个相册分类下得相册  
+        // 获取每个相册分类下得相册
         List<Photo> photoList = photoService.getPhotoAlnumFaceList(id);
         mav.addObject("photoList", photoList);
         mav.addObject("listSize", photoList.size());
-        
+
         return mav;
     }
 
     @RequestMapping(value = "/photo/detail", method = RequestMethod.GET)
-    public ModelAndView forwardPhotosDetailPage() {
-        return new ModelAndView("/photo/detail");
+    public ModelAndView forwardPhotosDetailPage(String albumId) {
+        ModelAndView mav = new ModelAndView("/photo/navigate_photo_detail");
+
+        PageSplitUtil<Photo> pageSplitUtil = photoService.getPhotoListForPageByAlbumId(0, 1, albumId);
+        mav.addObject("hasNext", pageSplitUtil.isHasNextIndex());
+        mav.addObject("hasPre", pageSplitUtil.isHasPreIndex());
+        mav.addObject("firstResult", pageSplitUtil.getCurrentIndex());
+        mav.addObject("imgPath", pageSplitUtil.getItems().get(0).getUrlPath());
+        mav.addObject("albumId", albumId);
+
+        return mav;
+    }
+
+    @RequestMapping(value = "/photo/index", method = RequestMethod.POST)
+    public ModelAndView indexPhoto(int firstResult, String albumId) {
+
+        ModelAndView mav = new ModelAndView("/photo/navigate_photo_ajax_detail");
+        
+        PageSplitUtil<Photo> pageSplitUtil = photoService.getPhotoListForPageByAlbumId(firstResult, 1, albumId);
+        mav.addObject("hasNext", pageSplitUtil.isHasNextIndex());
+        mav.addObject("hasPre", pageSplitUtil.isHasPreIndex());
+        mav.addObject("firstResult", pageSplitUtil.getCurrentIndex());
+        mav.addObject("imgPath", pageSplitUtil.getItems().get(0).getUrlPath());
+        mav.addObject("albumId", albumId);
+
+        return mav;
     }
 
     @RequestMapping(value = "/about/me", method = RequestMethod.GET)

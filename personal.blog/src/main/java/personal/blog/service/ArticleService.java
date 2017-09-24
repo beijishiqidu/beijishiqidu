@@ -30,4 +30,8 @@ public interface ArticleService {
 
     ExecResult saveArticleTypeInfo(String typeId, String typeName);
 
+    ArticleType getArticleTypeById(String id);
+
+    ExecResult deleteArticleTypeById(String typeId);
+
 }

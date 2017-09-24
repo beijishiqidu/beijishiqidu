@@ -51,11 +51,77 @@ var Common = (function() {
             };
         });
     };
+    
+    /**
+     * url 需要打开的url.<br/><br/>
+     * width 宽度，如果不指定，则默认为443px.<br/><br/>
+     * height 高度，如果不指定，则默认未300px.<br/><br/>
+     * completeCallback 弹出框口加载完成之后调用函数，如果不传入，则默认执行弹出窗口的resize方法.<br/><br/>
+     * closeCallback 弹出窗口关闭时调用的函数，可以不传入.<br/><br/>
+     */
+    var openPopup = function(url, width, height, completeCallback, closeCallback) {
+        var tmpWidth = width || '443';
+        var tmpHeight = height || '300';
+        var tmpCompleteCallback = completeCallback || function() {
+        	togglePopupBorder();
+            Common.resizePopup();
+            /*打开弹出窗口之后，需要加载的页面*/
+            
+        };
+        var tmpCloseCallback = closeCallback || function() {};
+        var path = App.getUrlPath();
+        $.colorbox({
+            href: path + url,
+            innerWidth: tmpWidth,
+            innerHeight: tmpHeight,
+            overlayClose: false,
+            onOpen: function() {
+                togglePopupBorder();
+            },
+            onComplete: tmpCompleteCallback,
+            onClosed: tmpCloseCallback
+        });
+    };
+    
+    var togglePopupBorder = function() {
+        if ($('#cboxTopLeft').is(':hidden')) {
+            $('#cboxTopLeft').show();
+            $('#cboxTopRight').show();
+            $('#cboxBottomLeft').show();
+            $('#cboxBottomRight').show();
+            $('#cboxMiddleLeft').show();
+            $('#cboxMiddleRight').show();
+            $('#cboxTopCenter').show();
+            $('#cboxBottomCenter').show();
+            $('#cboxClose').show();
+        } else {
+            $('#cboxTopLeft').hide();
+            $('#cboxTopRight').hide();
+            $('#cboxBottomLeft').hide();
+            $('#cboxBottomRight').hide();
+            $('#cboxMiddleLeft').hide();
+            $('#cboxMiddleRight').hide();
+            $('#cboxTopCenter').hide();
+            $('#cboxBottomCenter').hide();
+            $('#cboxClose').hide();
+        }
+    };
+    
+    var closePopup = function() {
+        $.colorbox.close();
+    };
+    var resizePopup = function() {
+        $.colorbox.resize();
+    };
 
     return {
         pagination: pagination,
         sortJsonDataByKey: sortJsonDataByKey,
-        gotoTop: gotoTop
+        gotoTop: gotoTop,
+        openPopup: openPopup,
+        togglePopupBorder: togglePopupBorder,
+        closePopup: closePopup,
+        resizePopup: resizePopup
     };
 })();
 

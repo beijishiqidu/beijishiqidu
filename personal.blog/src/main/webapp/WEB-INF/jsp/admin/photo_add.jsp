@@ -19,6 +19,10 @@
 <link rel="stylesheet" type="text/css" href="${path}/webfileupload/css/webuploader.css" />
 <link rel="stylesheet" type="text/css" href="${path}/webfileupload/css/demo.css" /> 
 <%@include file="../common_style.jsp"%>
+
+<link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">  
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 </head>
 <body class="admin-home-body">
     <div class="home">
@@ -76,10 +80,10 @@
                             
                             <span data-name="content" class="error-tips"></span>
                             <div class="button-area">
+                                <div id="resultMsg" class=""></div>
                                 <button class="button" type="button"
                                     onclick="App.submitPhotoInfo();">保存</button>
-                                <div class="clear-float"></div>
-                                <div id="resultMsg" class=""></div>
+                                <div class="cl"></div>
                             </div>
                         </form>
                         <iframe name="hideframe" id="hideframe" style="display:none"></iframe>

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import personal.blog.form.ArticleForm;
@@ -19,6 +20,7 @@ import personal.blog.form.FormAlert;
 import personal.blog.service.ArticleService;
 import personal.blog.util.PageSplitUtil;
 import personal.blog.vo.Article;
+import personal.blog.vo.ExecResult;
 
 import com.google.gson.Gson;
 
@@ -91,6 +93,25 @@ public class ArticleMgtController {
         PageSplitUtil<Article> psu = articleService.getArticleListForPage(firstResult, maxResults, StringUtils.EMPTY);
         mav.addObject("pagination", psu);
         return mav;
+    }
+    
+    @RequestMapping(value = "/delete-type", method = RequestMethod.POST)
+    @ResponseBody
+    public String deleteArticleType(String typeId) {
+
+        Map<String, Object> returnMap = new HashMap<String, Object>();
+        try {
+            ExecResult result = articleService.deleteArticleTypeById(typeId);
+            returnMap.put("result", result.isResult());
+            returnMap.put("msg", result.getMessage());
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+            returnMap.put("result", false);
+            returnMap.put("msg", e.getMessage());
+        }
+        Gson gson = new Gson();
+        String result = gson.toJson(returnMap);
+        return result;
     }
 
     @RequestMapping(value = "/editArticle.html", method = RequestMethod.GET)

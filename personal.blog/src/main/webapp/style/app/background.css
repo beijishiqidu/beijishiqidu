@@ -126,16 +126,12 @@ input[placeholder]{
 	margin: 20px auto;
 }
 
-
-.main-content .button-area{
-	height: 100px;
-}
 .main-content .button{
 	display: inline-block;
 	width:60px;
 	height: 30px;
-	margin: 20px auto;
 	float: right;
+    margin-bottom: 20px;
 }
 
 .main-content .error,

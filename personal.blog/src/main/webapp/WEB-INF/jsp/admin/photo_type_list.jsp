@@ -46,7 +46,7 @@
                             <table width="100%" height="100%">
                                 <thead>
                                     <th class="title">类型名称</th>
-                                    <th class="type">类型下相片数量</th>
+                                    <th class="type">类型下相册数量</th>
                                     <th class="operation">操作</th>
                                 </thead>
                                 <tbody>
@@ -59,10 +59,10 @@
                                             <td><div>
                                                     <span>${list.typeCount }</span>
                                                 </div></td>
-                                            <td><a
-                                                href="javascript:Event.forwardBackendPhotoTypeEditPage(${list.typeId})">编辑(待实现)</a>&nbsp;
-                                                <a
-                                                href="javascript:App.deletePhotoTypeById(${list.typeId})">删除(待实现)</a></td>
+                                            <td><a onclick="Event.openInCurrentTab('/admin/type/add/photo-type?typeId=${list.typeId}');"
+                                                href="javascript:void(0);">编辑</a>&nbsp;
+                                                <a onclick="App.deletePhotoTypeById(this,'${list.typeId}');"
+                                                href="javascript:void(0);">删除</a></td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>

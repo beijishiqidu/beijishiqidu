@@ -30,8 +30,8 @@
 }
 </style>
 
-<%@include file="../common_style.jsp"%>
 <%@include file="../common_javascript.jsp"%>
+<%@include file="../common_style.jsp"%>
 </head>
 <body class="admin-home-body">
     <div class="home">
@@ -43,7 +43,7 @@
                         id="main-content-wrapper">
                         <div class="customer-info-list">
                             <h3>文章类型列表</h3>
-                            <table width="100%" height="100%">
+                            <table width="100%" height="100%" class="table">
                                 <thead>
                                     <th class="title">类型名称</th>
                                     <th class="type">类型下文章数量</th>
@@ -59,10 +59,10 @@
                                             <td><div>
                                                     <span>${list.typeCount }</span>
                                                 </div></td>
-                                            <td><a
-                                                href="javascript:Event.forwardBackendArticleTypeEditPage(${list.typeId})">编辑(待实现)</a>&nbsp;
-                                                <a
-                                                href="javascript:App.deleteArticleTypeById(${list.typeId})">删除(待实现)</a></td>
+                                            <td><a onclick="Event.openInCurrentTab('/admin/type/add/article-type?typeId=${list.typeId}');"
+                                                href="javascript:void(0);">编辑</a>&nbsp;
+                                                <a onclick="App.deleteArticleTypeById(this,'${list.typeId}');"
+                                                href="javascript:void(0);">删除</a></td>
                                         </tr>
                                     </c:forEach>
                                 </tbody>

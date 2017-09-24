@@ -36,6 +36,7 @@ import personal.blog.form.PhotoForm;
 import personal.blog.service.PhotoService;
 import personal.blog.util.EnvUtil;
 import personal.blog.util.PageSplitUtil;
+import personal.blog.vo.ExecResult;
 import personal.blog.vo.Photo;
 import personal.blog.vo.PhotoAlbum;
 
@@ -125,7 +126,9 @@ public class PhotoMgtController {
         photoForm.setTitle(title);
         photoForm.setType(type);
         photoForm.setContent(list.isEmpty() ? StringUtils.EMPTY : list.toString());
-
+        if (StringUtils.isNotEmpty(photoAlbumId)) {
+            photoForm.setContent("EDIT");
+        }
         List<FormAlert> resultList = photoService.validatePhotoForm(photoForm);
 
         Map<String, Object> returnMap = new HashMap<String, Object>();
@@ -176,23 +179,23 @@ public class PhotoMgtController {
         return result;
     }
 
-    // @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    // public ModelAndView deletePhoto(Long photoId, Integer firstResult, Integer maxResults) {
-    // photoService.deletePhotoById(photoId);
-    // ModelAndView mav = new ModelAndView("admin/ajax_photo_list");
-    // PageSplitUtil<Photo> psu = photoService.getPhotoListForPage(firstResult, maxResults,
-    // StringUtils.EMPTY);
-    // mav.addObject("pagination", psu);
-    // return mav;
-    // }
+    @RequestMapping(value = "/delete-type", method = RequestMethod.POST)
+    @ResponseBody
+    public String deletePhotoType(String typeId) {
 
-    @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public ModelAndView forwardEditPhotoPage(Long photoId) {
-        Photo photo = photoService.getPhotoById(photoId);
-        ModelAndView mav = new ModelAndView("admin/photo_add");
-        mav.addObject("photoObj", photo);
-        mav.addObject("photoTypeList", photoService.getPhotoTypeList());
-        return mav;
+        Map<String, Object> returnMap = new HashMap<String, Object>();
+        try {
+            ExecResult result = photoService.deletePhotoTypeById(typeId);
+            returnMap.put("result", result.isResult());
+            returnMap.put("msg", result.getMessage());
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+            returnMap.put("result", false);
+            returnMap.put("msg", e.getMessage());
+        }
+        Gson gson = new Gson();
+        String result = gson.toJson(returnMap);
+        return result;
     }
 
     @RequestMapping(value = "/refresh", method = RequestMethod.GET)

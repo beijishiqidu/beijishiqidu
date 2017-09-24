@@ -65,6 +65,15 @@ public class GenericDaoImpl implements GenericDao {
     }
 
     @Override
+    public <T> void deleteObject(Class<T> cls, String id) {
+        T obj = hibernateTemplate.get(cls, Long.valueOf(id));
+        if (null != obj) {
+            hibernateTemplate.delete(obj);
+        }
+        hibernateTemplate.flush();
+    }
+
+    @Override
     public void deleteObject(Object entity) {
         hibernateTemplate.delete(entity);
         hibernateTemplate.flush();
@@ -254,8 +263,8 @@ public class GenericDaoImpl implements GenericDao {
     }
 
     @Override
-    public <T> List<T> getEntityObjectListByFullSql(final String fullSql, final Class<T> clzz){
-        
+    public <T> List<T> getEntityObjectListByFullSql(final String fullSql, final Class<T> clzz) {
+
         return hibernateTemplate.execute(new HibernateCallback<List<T>>() {
             @Override
             public List<T> doInHibernate(Session session) throws HibernateException {

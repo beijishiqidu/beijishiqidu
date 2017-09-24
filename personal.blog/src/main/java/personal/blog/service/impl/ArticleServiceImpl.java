@@ -9,6 +9,7 @@ import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
@@ -131,7 +132,12 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    @Cacheable(value = "org.hibernate.cache.internal.StandardQueryCache" ,key="'getArticleTypeCount'")
+    public ArticleType getArticleTypeById(String id) {
+        return genericDao.getObject(ArticleType.class, id);
+    }
+
+    @Override
+    @Cacheable(value = "org.hibernate.cache.internal.StandardQueryCache", key = "'getArticleTypeCount'")
     public List<TypeCount> getArticleTypeCount() {
         List<TypeCount> list =
                 genericDao.getEntityObjectListByFullSql("select a.type typeId,count(a.id) as typeCount from tbl_article a group by a.type",
@@ -160,19 +166,22 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     @Transactional(rollbackFor = DataAccessException.class, propagation = Propagation.REQUIRED)
+    @CacheEvict(value = "org.hibernate.cache.internal.StandardQueryCache", key = "'getArticleTypeList'", allEntries = true)
     public ExecResult saveArticleTypeInfo(String typeId, String typeName) {
-        
+
         ExecResult er = new ExecResult();
         if (StringUtils.isEmpty(typeName)) {
             er.setMessage("文章类型不能为空");
             return er;
         }
 
-        List<ArticleType> list = getArticleTypeList();
-        for (ArticleType at : list) {
-            if (at.getTypeName().equals(typeName)) {
-                er.setMessage("该类型名称已经存在");
-                return er;
+        if (StringUtils.isEmpty(typeId)) {
+            List<ArticleType> list = getArticleTypeList();
+            for (ArticleType at : list) {
+                if (at.getTypeName().equals(typeName)) {
+                    er.setMessage("该类型名称已经存在");
+                    return er;
+                }
             }
         }
 
@@ -184,11 +193,36 @@ public class ArticleServiceImpl implements ArticleService {
         }
         articleType.setTypeName(typeName);
         genericDao.saveOrUpdateObject(articleType);
-        
+
         er.setResult(true);
         er.setMessage("类型保存成功");
         er.getAppend().put("id", articleType.getId());
-        
+
+        return er;
+    }
+
+    @Transactional(rollbackFor = DataAccessException.class, propagation = Propagation.REQUIRED)
+    @Override
+    public ExecResult deleteArticleTypeById(String typeId) {
+        ExecResult er = new ExecResult();
+
+        // 查询有没有相册关联到此类型中，如果有，则提示不能删除.
+        DetachedCriteria dc = DetachedCriteria.forClass(Article.class);
+
+        if (StringUtils.isNotEmpty(typeId)) {
+            dc.createAlias("type", "type");
+            dc.add(Restrictions.eq("type.id", Long.valueOf(typeId)));
+        }
+        Long totalCount = genericDao.findCountByCriteria(dc);
+
+        if (totalCount.intValue() > 0) {
+            er.setResult(false);
+            er.setMessage("本文章类型下还有文章");
+        } else {
+            genericDao.deleteObject(ArticleType.class, typeId);
+            er.setResult(true);
+        }
+
         return er;
     }
 }
