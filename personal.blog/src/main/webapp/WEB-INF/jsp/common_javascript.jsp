@@ -18,6 +18,8 @@
     </c:otherwise>
 </c:choose>
 
+<script type="text/javascript" src="${path}/third-party/SyntaxHighlighter/shCore.js?version=${version}"></script>
+
 <script type="text/javascript">
     $(function() {
         App.setUrlPath("${path}");

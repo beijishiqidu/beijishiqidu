@@ -13,6 +13,7 @@ import org.apache.commons.fileupload.FileItemStream;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.log4j.Logger;
 
 import com.baidu.ueditor.PathFormat;
 import com.baidu.ueditor.define.AppInfo;
@@ -21,6 +22,8 @@ import com.baidu.ueditor.define.FileType;
 import com.baidu.ueditor.define.State;
 
 public class BinaryUploader {
+
+    private static final Logger LOGGER = Logger.getLogger(BinaryUploader.class);
 
     public static final State save(HttpServletRequest request, Map<String, Object> conf) {
         FileItemStream fileStream = null;
@@ -67,8 +70,12 @@ public class BinaryUploader {
 
             savePath = PathFormat.parse(savePath, originFileName);
 
-            String tmpSavePath = savePath.substring(2);
-            String physicalPath = (String) conf.get("rootPath") + "../" + "../" + "upload" + "/" + "image" + "/" + tmpSavePath;
+            String tmpSavePath = savePath.substring(1);
+            // String physicalPath = (String) conf.get("rootPath") + tmpSavePath;
+            // 因为rootPath被拼接成其他的路径了，因此只能在这里修改.
+            String physicalPath = "/app/data/static/" + tmpSavePath;
+
+            LOGGER.info("==============" + physicalPath);
 
             InputStream is = fileStream.openStream();
             State storageState = StorageManager.saveFileByInputStream(is, physicalPath, maxSize);
@@ -82,8 +89,10 @@ public class BinaryUploader {
 
             return storageState;
         } catch (FileUploadException e) {
+            LOGGER.error(e.getMessage(), e);
             return new BaseState(false, AppInfo.PARSE_REQUEST_ERROR);
         } catch (IOException e) {
+            LOGGER.error(e.getMessage(), e);
         }
         return new BaseState(false, AppInfo.IO_ERROR);
     }

@@ -21,12 +21,13 @@
 .detail-content-container .article-item .line{
     margin: 0 0 20px 0;
     border-bottom: 1px dotted #999;
-    height: 0;
+    /* height: 0; */
 }
 
 .detail-content-container .article-content{
     line-height: 35px;
     margin: 10px 20px 10px 20px;
+    overflow: hidden;
 }
 
 .no-content{

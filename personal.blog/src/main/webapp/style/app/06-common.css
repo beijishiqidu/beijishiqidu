@@ -128,7 +128,6 @@ input{
 span.error-tips {
     font-size: 12px;
     text-align: left;
-    float: left;
     color: red;
     display: inline-block;
 }

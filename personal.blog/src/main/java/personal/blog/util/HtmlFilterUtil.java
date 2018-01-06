@@ -18,6 +18,6 @@ public class HtmlFilterUtil {
             return htmlContent;
         }
 
-        return htmlContent.replaceAll("\r\n", "");
+        return htmlContent;//.replaceAll("\r\n", "");
     }
 }

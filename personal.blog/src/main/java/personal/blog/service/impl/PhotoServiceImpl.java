@@ -261,7 +261,7 @@ public class PhotoServiceImpl implements PhotoService {
 
         List<PhotoType> list = getPhotoTypeList();
         for (PhotoType at : list) {
-            if (at.getTypeName().equals(typeName)) {
+            if (at.getTypeName().equals(typeName) && StringUtils.isEmpty(typeId)) {
                 er.setMessage("该类型名称已经存在");
                 return er;
             }

@@ -25,6 +25,8 @@
     </c:otherwise>
 </c:choose>
 
+<link rel="stylesheet" type="text/css" href="${path}/third-party/SyntaxHighlighter/shCoreDefault.css?version=${version}" />
+
 <style type="text/css">
     form.pagination .button{
         behavior: url(${path}/style/pie/PIE.htc);

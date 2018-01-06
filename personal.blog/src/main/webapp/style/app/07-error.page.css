@@ -20,7 +20,6 @@ body{
 }
 .button div{
     display: inline-block;
-    background-color: #fd7100;
     color: #ffffff;
     padding: 5px;
     cursor: pointer;

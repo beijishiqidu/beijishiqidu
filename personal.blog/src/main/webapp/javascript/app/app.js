@@ -50,7 +50,8 @@ var App = (function() {
 				}
 			}
 		} else {
-			$('#resultMsg').html('<div class="success">' + data.msg + '</div>');
+			//$('#resultMsg').html('<div class="success">' + data.msg + '</div>');
+			$('#resultMsg').html('<div class="alert alert-success" role="alert">' + data.msg + '</div>');
 			//setTimeout("top.location.href='" + App.getUrlPath()+ "/admin/newsList.html" + "'", 1000);
 		}
 		$('form button').removeAttr('disabled');
@@ -73,6 +74,15 @@ var App = (function() {
         $('#articleTypeAddForm .edui-default.edui-editor').css('border', '1px solid #d4d4d4');
 		$('#articleTypeAddForm').submit();
 	};
+	
+	var clearErrorMsg = function() {
+        $('form input[name]').css('border', '1px solid #dadada');
+        $('form select[name]').css('border', '1px solid #dadada');
+        $('form span[aria-owns$=menu]').css('border', '1px solid #dadada');
+        $('span[data-name]').html('');
+        $('#resultMsg').html('');
+        $('form button').attr('disabled', 'disabled');
+    };
 
 	var submitArticleTypeInfoCallback = function(data) {
 		var data = jQuery.parseJSON(data);
@@ -263,6 +273,7 @@ var App = (function() {
 		initResizePopupImg: initResizePopupImg,
 		AutoResizeImage: AutoResizeImage,
 		prevPhoto: prevPhoto,
-		nextPhoto: nextPhoto
+		nextPhoto: nextPhoto,
+		clearErrorMsg: clearErrorMsg
 	};
 })();

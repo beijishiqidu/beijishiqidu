@@ -37,9 +37,9 @@
                         <p class="title"><a href="${path}/article/detail/${item.id}">${item.title}</a></p>
                         <div class="ap-area">
                             <div class="article-ap-la">
-                                <span class="label-title">标签：</span> <span
+                                <!-- <span class="label-title">标签：</span> <span
                                     class="label-content">java</span>&nbsp;&nbsp;
-                                <span class="label-content">HashMap</span>
+                                <span class="label-content">HashMap</span> -->
                             </div>
                             <div class="article-ap-ra">
                                 <span><fmt:formatDate type="both" dateStyle="medium" timeStyle="medium" value="${item.updateDate.time}" /></span>&nbsp;&nbsp;&nbsp;&nbsp;

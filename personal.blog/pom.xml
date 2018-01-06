@@ -326,6 +326,12 @@
             <artifactId>ccp-rest-sdk</artifactId>
             <version>1.6</version>
         </dependency>
+        
+        <dependency>
+		    <groupId>com.beijishiqidu</groupId>
+		    <artifactId>json.jar</artifactId>
+		    <version>1.0.0</version>
+		</dependency>
 
     </dependencies>
 
