@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="execute">
+	<property name="local.file.path" location="../../../../amwiki/"></property>
+	<property name="remote.ip" value="115.28.16.193"></property>
+	<property name="remote.username" value="root"></property>
+	<property name="remote.password" value="xmwan"></property>
+	
+	<target name="execute">
+		<scp todir="${remote.username}:${remote.password}@${remote.ip}:/app/amwiki" trust="true">
+			<fileset dir="${local.file.path}">
+			</fileset>
+		</scp>
+	</target>
+	
+</project>
