@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import personal.blog.form.ArticleForm;
 import personal.blog.form.FormAlert;
 import personal.blog.service.ArticleService;
+import personal.blog.util.HtmlFilterUtil;
 import personal.blog.util.PageSplitUtil;
 import personal.blog.vo.Article;
 import personal.blog.vo.ExecResult;
@@ -117,6 +118,7 @@ public class ArticleMgtController {
     @RequestMapping(value = "/editArticle.html", method = RequestMethod.GET)
     public ModelAndView forwardEditNewsPage(Long articleId) {
         Article article = articleService.getArticleById(articleId);
+        article.setContent(HtmlFilterUtil.fileterLine(article.getContent()));
         ModelAndView mav = new ModelAndView("admin/article_add");
         mav.addObject("articleObj", article);
         mav.addObject("articleTypeList", articleService.getArticleTypeList());

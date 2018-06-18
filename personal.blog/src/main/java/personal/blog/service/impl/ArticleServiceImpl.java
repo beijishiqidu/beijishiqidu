@@ -114,7 +114,7 @@ public class ArticleServiceImpl implements ArticleService {
             article = genericDao.getObject(Article.class, articleId);
         }
 
-        article.setContent(HtmlFilterUtil.fileterLine(content));
+        article.setContent(content);
         article.setTitle(title);
         article.setUpdateDate(Calendar.getInstance());
         ArticleType at = genericDao.getObject(ArticleType.class, type);
