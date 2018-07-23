@@ -1,6 +1,6 @@
 # 解决Docker启动服务器链接失败-Job for docker.service failed because the control process exited error code
 ## 今天装Docker时发现，都已经安装完成了，发现报如下错误：
-```shell
+```java
 正准备解包 .../git-man_1%3a2.7.4-0ubuntu1.4_all.deb  ...
 正在解包 git-man (1:2.7.4-0ubuntu1.4) ...
 正在选中未选择的软件包 git。
@@ -37,7 +37,7 @@ E: Sub-process /usr/bin/dpkg returned an error code (1)
 ![](assets/003/20180710-5fb16669.png)  
 
 ## 执行如下命令即可解决：
-```shell
+```java
 export DOCKER_OPTS='-s overlay2'
 sudo systemctl daemon-reload  &   sudo systemctl restart docker
 ```

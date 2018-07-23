@@ -22,13 +22,13 @@
 .hljs-strong,
 .hljs-emphasis,
 .hljs-quote {
-  color: #df5000;
+  color: #0837c7;
 }
 
 .hljs-keyword,
 .hljs-selector-tag,
 .hljs-type {
-  color: #a71d5d;
+  color: #f20975;
 }
 
 .hljs-literal,
@@ -40,7 +40,7 @@
 
 .hljs-section,
 .hljs-name {
-  color: #63a35c;
+  color: #23e30e;
 }
 
 .hljs-tag {
@@ -53,7 +53,7 @@
 .hljs-selector-class,
 .hljs-selector-attr,
 .hljs-selector-pseudo {
-  color: #795da3;
+  color: #0a11e3;
 }
 
 .hljs-addition {

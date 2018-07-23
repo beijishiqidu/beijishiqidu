@@ -4,7 +4,9 @@
 
 ![欢迎使用amWiki！](amWiki/images/logo.png "欢迎使用amWiki！")  
 
-### 欢迎使用 amWiki 轻文库!
-—— **amWiki 致力于让大家可以更简单、更便捷的建设个人和团队文库！**  
+### 欢迎大家来到北极十七度的文库!
+> QQ|微信：396212976
 
-[ [view amWiki on Github](https://github.com/TevinLi/amWiki) ]
+> QQ交流群：424695097
+
+—— **本人本着学习和交流的目的，部分文章从其他地方摘抄或者收录而来，如有侵权，请联系本人，本人会立马删除**
