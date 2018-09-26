@@ -14,6 +14,7 @@ The import org.springframework.test.context.junit4.SpringJUnit4ClassRunner canno
 		</dependency>
 ```
 上述没有指定依赖的版本号，肯定是在parent工程中指定了。如下图，maven的依赖有那么多版本呢，还找不到？
+
 ![](assets/006/20180721-7a6be951.png)  
 
 2、怀疑IDEA没有刷新，然后尝试用命令行的方式去执行，发现依然无果。
