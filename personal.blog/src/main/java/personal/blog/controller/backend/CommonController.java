@@ -18,16 +18,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+
 import personal.blog.cache.TypeCount;
 import personal.blog.service.ArticleService;
-import personal.blog.service.CommonService;
 import personal.blog.service.LoginService;
 import personal.blog.service.PhotoService;
 import personal.blog.vo.ArticleType;
 import personal.blog.vo.ExecResult;
 import personal.blog.vo.PhotoType;
-
-import com.google.gson.Gson;
 
 @Controller
 public class CommonController {
@@ -36,9 +35,6 @@ public class CommonController {
 
     @Autowired
     private LoginService loginService;
-
-    @Autowired
-    private CommonService commonService;
 
     @Autowired
     private PhotoService photoService;

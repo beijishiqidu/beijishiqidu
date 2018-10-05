@@ -39,7 +39,7 @@
                 </div>
                 <div class="child-div">
                     <p class="v-line title">关于我</p>
-                    <p class="v-line" style="line-height: 24px">没有在深夜痛哭做的人，不足以道人生我常常想，我可以写多久的代码六七十岁怎么办，后来我想通了怕什么，那会我仍然可以写，我本将心向明月，奈何明月照沟渠。</p>
+                    <p class="v-line" style="line-height: 24px">没有在深夜痛哭过的人，不足以道人生，我常常想，我可以写多久的代码六七十岁怎么办，后来我想通了怕什么，那会我仍然可以写。</p>
                 </div>
             </div>
         </div>
