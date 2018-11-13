@@ -16,7 +16,8 @@
 - [Docker容器进入的4种方式](?file=003-Docker/12-Docker容器进入的4种方式 "Docker容器进入的4种方式")
 
 ##### Ubuntu
-- [Ubuntu中无法获得锁](?file=004-Ubuntu/01-Ubuntu中无法获得锁 "Ubuntu中无法获得锁")
+- [Ubuntu中无法获得锁](?file=004-Ubuntu/001-Ubuntu中无法获得锁 "Ubuntu中无法获得锁")
+- [解决Linux中Ubuntu16.04声音一直静音的方法](?file=004-Ubuntu/006-解决Linux中Ubuntu16.04声音一直静音的方法 "解决Linux中Ubuntu16.04声音一直静音的方法")
 
 ##### Maven
 - [maven中scope标签详解](?file=005-Maven/01-maven中scope标签详解 "maven中scope标签详解")
@@ -31,12 +32,10 @@
 - [spring boot之定时任务](?file=006-Spring Boot/04-spring boot之定时任务 "spring boot之定时任务")
 
 ##### 其他
-- [CAS实现单点登录SSO执行原理探究&#40;终于明白了&#41;](?file=007-其他/001-CAS实现单点登录SSO执行原理探究&#40;终于明白了&#41; "CAS实现单点登录SSO执行原理探究&#40;终于明白了&#41;")
 - [IDEA常用快捷键总结](?file=007-其他/002-IDEA常用快捷键总结 "IDEA常用快捷键总结")
 - [IDEA运行工程报错](?file=007-其他/003-IDEA运行工程报错 "IDEA运行工程报错")
 - [IDEA的Ctrl+Alt+Left失效](?file=007-其他/004-IDEA的Ctrl+Alt+Left失效 "IDEA的Ctrl+Alt+Left失效")
 - [IntelliJ IDEA 设置代码提示或自动补全的快捷键 &#40;附IntelliJ IDEA常用快捷键&#41;](?file=007-其他/005-IntelliJ IDEA 设置代码提示或自动补全的快捷键 &#40;附IntelliJ IDEA常用快捷键&#41; "IntelliJ IDEA 设置代码提示或自动补全的快捷键 &#40;附IntelliJ IDEA常用快捷键&#41;")
-- [解决Linux中Ubuntu16.04声音一直静音的方法](?file=007-其他/006-解决Linux中Ubuntu16.04声音一直静音的方法 "解决Linux中Ubuntu16.04声音一直静音的方法")
 
 ##### Spring Cloud
 - [spring cloud项目性能调优系列一之网关zuul](?file=008-Spring Cloud/001-spring cloud项目性能调优系列一之网关zuul "spring cloud项目性能调优系列一之网关zuul")
@@ -45,8 +44,9 @@
 - [小米手环充不上电的解决办法](?file=009-生活/001-小米手环充不上电的解决办法 "小米手环充不上电的解决办法")
 
 ##### Cas单点登陆
-- [Cas的基本架构](?file=010-Cas单点登陆/001-Cas的基本架构 "Cas的基本架构")
-- [安装要求](?file=010-Cas单点登陆/002-安装要求 "安装要求")
+- [00-CAS实现单点登录SSO执行原理探究&#40;终于明白了&#41;](?file=010-Cas单点登陆/1001-00-CAS实现单点登录SSO执行原理探究&#40;终于明白了&#41; "00-CAS实现单点登录SSO执行原理探究&#40;终于明白了&#41;")
+- [01-Cas的基本架构](?file=010-Cas单点登陆/1002-01-Cas的基本架构 "01-Cas的基本架构")
+- [02-安装要求](?file=010-Cas单点登陆/1003-02-安装要求 "02-安装要求")
 
 ##### Redis
 - [Redis 基础数据结构](?file=011-Redis/1001-Redis 基础数据结构 "Redis 基础数据结构")
